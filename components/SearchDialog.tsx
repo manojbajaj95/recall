@@ -12,9 +12,8 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
-import { Loader,  Frown, CornerDownLeft, Search, Wand } from 'lucide-react'
-import { useActionState } from 'react'
-import { useFormStatus } from 'react-dom'
+import { Loader, Frown, CornerDownLeft, Search, Wand } from 'lucide-react'
+import { useFormState as useActionState, useFormStatus } from 'react-dom'
 
 export function SearchDialog({ getRelevantContent }: any) {
   const { pending } = useFormStatus()
@@ -30,7 +29,7 @@ export function SearchDialog({ getRelevantContent }: any) {
             <span className="inline-block ml-4 grow">Search...</span>
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[425px] bg-white">
           <DialogHeader>
             <DialogTitle>Search your documents</DialogTitle>
             <DialogDescription>

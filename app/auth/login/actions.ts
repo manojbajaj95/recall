@@ -49,6 +49,10 @@ export const signInWithEmail = async (state: State, formData: FormData) => {
   } catch (error) {
     return { status: 'error', message: 'please enter valid email' }
   }
+  if (email != "manojbajaj95@gmail.com") {
+    return { status: 'error', message: 'Recall is currently in invite-only mode. Please request for invite or try another email.' }
+  }
+
 
   const { data, error } = await supabase.auth.signInWithOtp({
     email: email,

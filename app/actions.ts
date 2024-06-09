@@ -1,5 +1,4 @@
 // @ts-nocheck
-
 'use server'
 
 import { embed } from 'ai'
@@ -14,7 +13,7 @@ export type State = {
   message: string | string[]
 } | null
 
-export const createEmbed = async (prevState: State, formData: FormData) => {
+export const createEmbed = async (prevState: State, formData: FormData): Promise<State> => {
   // console.log("Request received")
   const supabaseClient = createClient(cookies())
   const { data: UserData } = await supabaseClient.auth.getUser()
@@ -136,7 +135,7 @@ async function extractMd(url: string) {
   return text
 }
 
-export const getRelevantContent = async (prevState: State, formData: FormData) => {
+export const getRelevantContent = async (prevState: State, formData: FormData): Promise<State> => {
   const query = formData.get('query') as string
   const match_count = null // formData.get("match_count") as number
   const match_threshold = null
