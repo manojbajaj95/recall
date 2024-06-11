@@ -1,12 +1,14 @@
 // @ts-nocheck
 'use server'
 
-import { embed } from 'ai'
+import { embed, generateText } from 'ai'
 import { openai } from '@ai-sdk/openai'
 import { createClient } from '@/lib/supabase/server'
 import { cookies } from 'next/headers'
 import { RecursiveCharacterTextSplitter } from '@langchain/textsplitters'
 import { redirect } from 'next/navigation'
+import { Resend } from 'resend'
+import { WaitlistTemplate } from '@/components/email/waitlist-template'
 
 export type State = {
   status: 'success' | 'error'
@@ -183,9 +185,52 @@ export const getRelevantContent = async (prevState: State, formData: FormData): 
     const content = pageSection.content
     contextText.push(content)
   }
-  console.log(contextText)
+  // console.log(contextText)
   return {
     status: 'success',
     message: contextText,
+  }
+}
+
+export const addToWailistAudience = async (email: string) => {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const { data, error } = await resend.contacts.create({
+    email: email,
+    unsubscribed: false,
+    audienceId: process.env.RESEND_AUDIENCE || "",
+  });
+  if (error) {
+    console.error(error)
+    return false
+  }
+  return true
+}
+
+
+export const sendWaitlistMail = async (email: string) => {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  // Send to user mentioning they have been added to the waitlist
+  const { data, error } = await resend.emails.send({
+    from: 'hello@zetsy.dev',
+    to: [email],
+    subject: 'Welcome to Zetsy',
+    react: WaitlistTemplate({ email: email })
+  });
+  if (error) {
+    console.error(error)
+    return false
+  }
+  return true
+}
+
+
+export async function addWaitlist(prevState: State, formData: FormData): Promise<State> {
+  const email = formData.get("email") as string
+  // console.log(email)
+  await sendWaitlistMail(email)
+  await addToWailistAudience(email)
+  return {
+    status: "success",
+    message: 'You are now added to waitlist. Check your email for further instructions.',
   }
 }

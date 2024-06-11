@@ -17,13 +17,13 @@ const features = [
   {
     title: 'Seamless Saving',
     description:
-      "Easily save links to your favorite blogs, tweets, YouTube videos, and more. With Recall, all your online discoveries are just a click away.",
+      "Easily save links to your favorite blogs, tweets, YouTube videos, and more. With Zetsy, all your online discoveries are just a click away.",
     image: screenshotPayroll,
   },
   {
     title: 'Personal Notes & Documents',
     description:
-      "Store your personal notes and private documents securely. Whether it’s a brainstorming session or important paperwork, Recall keeps everything safe and accessible.",
+      "Store your personal notes and private documents securely. Whether it’s a brainstorming session or important paperwork, Zetsy keeps everything safe and accessible.",
     image: screenshotExpenses,
   },
   {
@@ -35,16 +35,19 @@ const features = [
   {
     title: 'Chat with Your Data',
     description:
-      'Engage in meaningful conversations with your stored information. Whether you need a summary or specific details, Recall’s chat feature makes interacting with your data simple and intuitive.',
+      'Engage in meaningful conversations with your stored information. Whether you need a summary or specific details, Zetsy’s chat feature makes interacting with your data simple and intuitive.',
     image: screenshotReporting,
   },
   {
     title: 'Integration with Agents',
     description:
-      'Leverage your saved data with various agents for enhanced productivity and insights. Recall seamlessly integrates with tools and agents, enhancing your workflow and decision-making process.',
+      'Leverage your saved data with various agents for enhanced productivity and insights. Zetsy seamlessly integrates with tools and agents, enhancing your workflow and decision-making process.',
     image: screenshotReporting,
   },
 ]
+
+const title = "Powerful and Private Memory";
+const description = "";
 
 export function PrimaryFeatures() {
   let [tabOrientation, setTabOrientation] = useState<'horizontal' | 'vertical'>(
@@ -82,13 +85,14 @@ export function PrimaryFeatures() {
       />
       <Container className="relative">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
+
+
           <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl md:text-5xl">
-            Powerful and Private Memory
+            {title}
           </h2>
-          {/* <p className="mt-6 text-lg tracking-tight text-blue-100">
-            Well everything you need if you aren’t that picky about minor
-            details like tax compliance.
-          </p> */}
+          <p className="mt-6 text-lg tracking-tight text-blue-100">
+            {description}
+          </p>
         </div>
         <TabGroup
           className="mt-16 grid grid-cols-1 items-center gap-y-2 pt-10 sm:gap-y-6 md:mt-20 lg:grid-cols-12 lg:pt-0"

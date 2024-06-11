@@ -138,9 +138,9 @@ export function Pricing() {
             name="Starter"
             price="$1.99"
             description="Good for anyone who wants to try it out"
-            href="/auth/register"
+            href="/auth/login"
             features={[
-              'Chat with recall - powered by GPT4',
+              'Chat powered by GPT4',
               'Supports Blogs, tweets and peronal notes',
               '10 queries daily',
               '200 docs storage',
@@ -152,7 +152,7 @@ export function Pricing() {
             name="Lite"
             price="$7.99"
             description="Perfect for daily use"
-            href="/auth/register"
+            href="/auth/login"
             features={[
               'Everything in Starter',
               "Additionally support docs and pdf",
@@ -165,7 +165,7 @@ export function Pricing() {
             name="Pro"
             price="$15"
             description="For the power users out there"
-            href="/auth/register"
+            href="/auth/login"
             features={[
               'Everything in Lite',
               "Support all media formats",

@@ -25,7 +25,7 @@ export function CallToAction() {
             Ready to Enhance Your Digital Memory?
           </h2>
           <p className="mt-4 text-lg tracking-tight text-white">
-            Join  Recall  today and start saving, organizing, and utilizing your online discoveries like never before.
+            Join Zetsy today and start saving, organizing, and utilizing your online discoveries like never before.
           </p>
           <Button className="mt-10">
             <Link href="/auth/login">

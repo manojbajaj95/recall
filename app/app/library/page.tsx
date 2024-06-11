@@ -1,27 +1,40 @@
-import Link from 'next/link'
-import { Logo } from '@/components/Logo'
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/tui/button"
+import { Database } from "@/lib/database.types"
+import { createClient } from "@/lib/supabase/server"
+import { cookies } from "next/headers"
 
-export default function NotFound() {
+
+type Source = Database["public"]["Tables"]["sources"]["Row"]
+
+export default async function Library() {
+
+
+  const getSources = async () => {
+    const client = createClient(cookies())
+    const { data, error } = await client.from("sources").select("*")
+    if (error) {
+      return []
+    }
+    return data
+  }
+
+  const sources: Source[] = await getSources()
+
   return (
     <>
-      <div className="flex">
-        <Link href="/" aria-label="Home">
-          <Logo className="h-10 w-auto" />
-        </Link>
-      </div>
-      <p className="mt-20 text-sm font-medium text-gray-700">404</p>
-      <h1 className="mt-3 text-lg font-semibold text-gray-900">
-        Coming Soon
-      </h1>
-      <p className="mt-3 text-sm text-gray-700">
-        Sorry, we couldn’t find the page you’re looking for.
-      </p>
-      <Button className="mt-10">
-        <Link href="/app" >
-          Go back home
-        </Link>
-      </Button>
+      <main className="h-full">
+        <div className="">
+          {sources.map((source, index) => (
+            <div key={index} className="border rounded">
+              <p>Type: {source.type}</p>
+              <p>{source.source}</p>
+              <Button href={source.source} target="_blank">View Source</Button>
+              <Button href="/app/chat">Chat</Button>
+            </div>
+          ))}
+        </div>
+      </main>
     </>
   )
 }
+

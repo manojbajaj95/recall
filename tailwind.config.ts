@@ -41,5 +41,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate'), formsPlugin, headlessuiPlugin],
+  plugins: [require('tailwindcss-animate'), formsPlugin, headlessuiPlugin, require('@tailwindcss/typography'),],
 } satisfies Config

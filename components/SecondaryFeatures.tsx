@@ -23,7 +23,7 @@ const features: Array<Feature> = [
     name: 'Stay Organized',
     summary: 'Keep all your important content in one place.',
     description:
-      'Keep all your important content in one place, neatly organized and easily searchable. Recall ensures that you never lose track of valuable information.',
+      'Keep all your important content in one place, neatly organized and easily searchable. Zetsy ensures that you never lose track of valuable information.',
     image: screenshotProfitLoss,
 
   },
@@ -31,7 +31,7 @@ const features: Array<Feature> = [
     name: 'Boost Productivity',
     summary: 'Spend less time searching and more time doing.',
     description:
-      'Spend less time searching and more time doing. With Recall’s efficient saving and retrieval system, you can focus on what matters most.',
+      'Spend less time searching and more time doing. With Zetsy’s efficient saving and retrieval system, you can focus on what matters most.',
     image: screenshotInventory,
 
   },
@@ -39,7 +39,7 @@ const features: Array<Feature> = [
     name: 'Enhanced Privacy',
     summary: 'Your data, your rules.',
     description:
-      'Your data, your rules. Recall prioritizes your privacy, ensuring that all your information is stored securely and accessed only by you.',
+      'Your data, your rules. Zetsy prioritizes your privacy, ensuring that all your information is stored securely and accessed only by you.',
     image: screenshotContacts,
 
   },
@@ -47,7 +47,7 @@ const features: Array<Feature> = [
     name: 'Effortless Access',
     summary: 'Access your saved content anytime, anywhere.',
     description:
-      'Access your saved content anytime, anywhere. With Recall, your digital memory is always at your fingertips, whether you\'re on your desktop or mobile device.',
+      'Access your saved content anytime, anywhere. With Zetsy, your digital memory is always at your fingertips, whether you\'re on your desktop or mobile device.',
     image: screenshotContacts,
 
   },
@@ -60,6 +60,10 @@ const features: Array<Feature> = [
 
   },
 ]
+
+
+const title = "Simplify everyday business tasks.";
+const description = "Because you’d probably be a little confused if we suggested you complicate your everyday business tasks instead.";
 
 
 function Feature({
@@ -189,12 +193,13 @@ export function SecondaryFeatures() {
     >
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
+
+
           <h2 className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl">
-            Simplify everyday business tasks.
+            {title}
           </h2>
           <p className="mt-4 text-lg tracking-tight text-slate-700">
-            Because you’d probably be a little confused if we suggested you
-            complicate your everyday business tasks instead.
+            {description}
           </p>
         </div>
         <FeaturesMobile />

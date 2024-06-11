@@ -1,27 +1,33 @@
-import Link from 'next/link'
-import { Logo } from '@/components/Logo'
-import { Button } from '@/components/ui/button'
+"use client"
 
-export default function NotFound() {
+import { Input } from "@/components/tui/input"
+import { Description, Field, FieldGroup, Fieldset, Label, Legend } from '@/components/tui/fieldset'
+import { Button } from "@/components/tui/button"
+import { useFormState as useActionState, useFormStatus } from 'react-dom'
+import { createEmbed } from "@/app/actions"
+
+export default function Home() {
+  const [state, formAction] = useActionState(createEmbed, null)
+  const { pending } = useFormStatus()
+
   return (
     <>
-      <div className="flex">
-        <Link href="/" aria-label="Home">
-          <Logo className="h-10 w-auto" />
-        </Link>
-      </div>
-      <p className="mt-20 text-sm font-medium text-gray-700">404</p>
-      <h1 className="mt-3 text-lg font-semibold text-gray-900">
-        Coming Soon
-      </h1>
-      <p className="mt-3 text-sm text-gray-700">
-        Sorry, we couldn’t find the page you’re looking for.
-      </p>
-      <Button className="mt-10">
-        <Link href="/app" >
-          Go back home
-        </Link>
-      </Button>
+      <main className="h-full">
+        <form action={formAction}>
+          <div className="flex flex-col space-y-2">
+            <Field>
+              <Label>Enter a URL you want to save</Label>
+              <Description>Currently only websites are supported.</Description>
+              <Input id="url" name="url" placeholder="https://example.com" />
+            </Field>
+            {state?.message}
+            <Button type="submit" disabled={pending}>
+              Submit
+            </Button>
+          </div>
+        </form>
+      </main>
     </>
   )
 }
+

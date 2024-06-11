@@ -3,10 +3,11 @@ import './globals.css'
 // import { ThemeProvider } from '@/components/theme-provider'
 import { Inter, Lexend } from 'next/font/google'
 import { cn } from '@/lib/utils'
+import { CSPostHogProvider } from '@/components/Posthog'
 
 export const metadata: Metadata = {
-  title: 'Recall',
-  description: 'You memory',
+  title: 'Zetsy',
+  description: 'Remember everything with your Digital Brain',
 }
 
 const inter = Inter({
@@ -32,11 +33,11 @@ export default function RootLayout({
       inter.variable,
       lexend.variable,
     )}>
-      <body className="flex h-full flex-col">
-
-        {children}
-
-      </body>
+      <CSPostHogProvider>
+        <body className="flex h-full flex-col">
+          {children}
+        </body>
+      </CSPostHogProvider>
     </html>
   )
 }

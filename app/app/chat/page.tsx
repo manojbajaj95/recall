@@ -1,27 +1,42 @@
-import Link from 'next/link'
-import { Logo } from '@/components/Logo'
-import { Button } from '@/components/ui/button'
+"use client"
 
-export default function NotFound() {
+import { Button } from "@/components/tui/button"
+import { Description, Field, Label } from "@/components/tui/fieldset"
+import { Textarea } from "@/components/tui/textarea"
+import { useChat } from 'ai/react';
+import ReactMarkdown from 'react-markdown';
+
+import remarkGfm from 'remark-gfm';
+import remarkHtml from 'remark-html';
+import remarkBreaks from 'remark-breaks';
+import remarkMath from 'remark-math';
+import { Input } from "@/components/tui/input"
+
+export default function Home() {
+  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
+    api: '/api/chat',
+  });
+
   return (
     <>
-      <div className="flex">
-        <Link href="/app" aria-label="Home">
-          <Logo className="h-10 w-auto" />
-        </Link>
-      </div>
-      <p className="mt-20 text-sm font-medium text-gray-700">404</p>
-      <h1 className="mt-3 text-lg font-semibold text-gray-900">
-        Coming Soon
-      </h1>
-      <p className="mt-3 text-sm text-gray-700">
-        Sorry, we couldn’t find the page you’re looking for.
-      </p>
-      <Button className="mt-10">
-        <Link href="/app" >
-          Go back home
-        </Link>
-      </Button>
+      <main className="">
+        {messages.map(message => (
+          <div key={message.id}>
+            {message.role === 'user' ? 'User: ' : 'AI: '}
+            {message.content}
+          </div>
+        ))}
+        <form className="space-y-2" onSubmit={handleSubmit}>
+          <Field>
+            <Label>Ask AI</Label>
+            <Description>Ask something</Description>
+            <Input name="prompt" value={input} onChange={handleInputChange} id="input" />
+          </Field>
+          <Button type="submit" disabled={isLoading}>Ask</Button>
+        </form>
+      </main >
     </>
   )
 }
+
+

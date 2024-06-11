@@ -1,5 +1,4 @@
 import * as Headless from '@headlessui/react'
-import { Description, Field, Label } from '@headlessui/react'
 import { clsx } from 'clsx'
 import { forwardRef } from 'react'
 
@@ -91,5 +90,3 @@ export const Input = forwardRef(function Input(
     </span>
   )
 })
-
-export { Description, Field, Label }
