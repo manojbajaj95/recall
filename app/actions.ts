@@ -93,8 +93,8 @@ export const createEmbed = async (prevState: State, formData: FormData): Promise
   }
 
   const splitter = new RecursiveCharacterTextSplitter({
-    chunkSize: 8192,
-    chunkOverlap: 512,
+    chunkSize: 2048,
+    chunkOverlap: 128,
   })
 
   const output = await splitter.createDocuments([text])
@@ -137,18 +137,7 @@ async function extractMd(url: string) {
   return text
 }
 
-export const getRelevantContent = async (prevState: State, formData: FormData): Promise<State> => {
-  const query = formData.get('query') as string
-  const match_count = null // formData.get("match_count") as number
-  const match_threshold = null
-  const min_content_length = null
-  if (!query) {
-    return {
-      status: 'error',
-      message: 'Query is required',
-    }
-  }
-
+export const getContext = async (query, match_count, match_threshold, min_content_length) => {
   const supabaseClient = createClient(cookies())
 
   // Moderate the content to comply with OpenAI T&C
@@ -165,7 +154,7 @@ export const getRelevantContent = async (prevState: State, formData: FormData): 
     'match_page_sections',
     {
       embedding,
-      match_count: match_count || 10,
+      match_count: match_count || 3,
       match_threshold: match_threshold || 0.5,
       min_content_length: min_content_length || 50,
     }
@@ -173,10 +162,7 @@ export const getRelevantContent = async (prevState: State, formData: FormData): 
 
   if (matchError) {
     console.error('Error fetching sections:', matchError)
-    return {
-      status: 'error',
-      message: 'Server Error',
-    }
+    return []
   }
 
   let contextText = []
@@ -185,6 +171,23 @@ export const getRelevantContent = async (prevState: State, formData: FormData): 
     const content = pageSection.content
     contextText.push(content)
   }
+  return contextText
+}
+
+export const getRelevantContent = async (prevState: State, formData: FormData): Promise<State> => {
+  const query = formData.get('query') as string
+  const match_count = null // formData.get("match_count") as number
+  const match_threshold = null
+  const min_content_length = null
+  if (!query) {
+    return {
+      status: 'error',
+      message: 'Query is required',
+    }
+  }
+
+
+  const contextText = await getContext(query, match_count, match_threshold, min_content_length)
   // console.log(contextText)
   return {
     status: 'success',
