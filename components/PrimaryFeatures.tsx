@@ -7,10 +7,11 @@ import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
 import backgroundImage from '@/images/background-features.jpg'
-import screenshotExpenses from '@/images/screenshots/expenses.png'
-import screenshotPayroll from '@/images/screenshots/payroll.png'
-import screenshotReporting from '@/images/screenshots/reporting.png'
-import screenshotVatReturns from '@/images/screenshots/vat-returns.png'
+import remember from '@/images/screenshots/remember.png'
+import screenshotPayroll from '@/images/screenshots/sync.png'
+import save from '@/images/screenshots/save_anything.png'
+import chat from '@/images/screenshots/landing_notes.png'
+import reading from '@/images/screenshots/reading-nook.png'
 import React from 'react'
 
 const features = [
@@ -18,32 +19,27 @@ const features = [
     title: 'Seamless Saving',
     description:
       "Easily save links to your favorite blogs, tweets, YouTube videos, and more. With Zetsy, all your online discoveries are just a click away.",
-    image: screenshotPayroll,
+    image: save,
   },
   {
     title: 'Personal Notes & Documents',
     description:
       "Store your personal notes and private documents securely. Whether it’s a brainstorming session or important paperwork, Zetsy keeps everything safe and accessible.",
-    image: screenshotExpenses,
+    image: reading,
   },
   {
     title: 'Intelligent Search',
     description:
       "Find what you need when you need it. Our advanced search functionality allows you to quickly locate any saved content, from the latest articles to your private notes.",
-    image: screenshotVatReturns,
+    image: remember,
   },
   {
     title: 'Chat with Your Data',
     description:
       'Engage in meaningful conversations with your stored information. Whether you need a summary or specific details, Zetsy’s chat feature makes interacting with your data simple and intuitive.',
-    image: screenshotReporting,
+    image: chat,
   },
-  {
-    title: 'Integration with Agents',
-    description:
-      'Leverage your saved data with various agents for enhanced productivity and insights. Zetsy seamlessly integrates with tools and agents, enhancing your workflow and decision-making process.',
-    image: screenshotReporting,
-  },
+
 ]
 
 const title = "Powerful and Private Memory";

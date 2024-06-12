@@ -2,58 +2,31 @@
 
 import * as React from 'react'
 import { Button } from '@/components/tui/button'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Loader, Frown, CornerDownLeft, Search, Wand } from 'lucide-react'
 import { useFormState as useActionState, useFormStatus } from 'react-dom'
 import { Field, Label } from '@/components/tui/fieldset'
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import remarkHtml from 'remark-html';
-import remarkBreaks from 'remark-breaks';
-import remarkMath from 'remark-math';
+import { MarkdownRenderer } from '@/components/Markdown'
 
 const SubmitButton = () => {
-  const { pending } = useFormStatus()
-  return (<Button type="submit" disabled={pending}>Search</Button>)
-}
-
-const Loading = () => {
   const { pending } = useFormStatus()
   if (pending) return (
     <div className="animate-spin relative flex w-5 h-5 ml-2">
       <Loader />
     </div>
   )
-  return (<></>)
+  return (<Button type="submit" disabled={pending}>Search</Button>)
 }
 
-const MarkdownRenderer = ({ markdown }) => {
-  return (
-    <div>
-      <ReactMarkdown remarkPlugins={[remarkGfm, remarkHtml, remarkBreaks, remarkMath]}>
-        {markdown}
-      </ReactMarkdown>
-    </div>
-  );
-};
+
+
 
 const Results = ({ results }: { results: [] }) => {
   if (!results) return <NoResultsFound />
-
   return (
     <div className="items-center gap-4 dark:text-white overflow-auto">
-      <h3 className="font-semibold">Answer:</h3>
       {results.map((item, index) =>
-        <div key={index} className='border p-4'>
+        <div key={index} className='border p-4 space-y-2'>
           <MarkdownRenderer markdown={item} />
         </div>)
       }
@@ -78,20 +51,24 @@ const NoResultsFound = () => {
 export function SearchBar({ getRelevantContent }: any) {
 
   const [state, formAction] = useActionState(getRelevantContent, null)
+  const [isAtTop, setIsAtTop] = React.useState(true);
 
   return (
     <>
-      <form action={formAction} className='space-y-2 text-center'>
-        <div className='flex  items-center'>
+      <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">Search your content</h2>
+      <form action={formAction} className='space-y-2 mx-auto flex flex-col justify-center'>
+        <div className='flex items-center justify-center '>
           <Search />
-          <Field className='grow'>
-            <Input className="ml-4" placeholder='Search your library...' name='query' id='query' />
+          <Field className='grow mx-4'>
+            <Input placeholder='Search your library...' name='query' id='query' />
           </Field>
+          <SubmitButton />
         </div>
-        <SubmitButton />
-        <Loading />
-        <Results results={state?.message || []} />
+        <div className='flex justify-center'>
+
+        </div>
       </form>
+      <Results results={state?.message || []} />
     </>
   )
 }

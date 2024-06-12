@@ -5,9 +5,9 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
-import screenshotContacts from '@/images/screenshots/contacts.png'
-import screenshotInventory from '@/images/screenshots/inventory.png'
-import screenshotProfitLoss from '@/images/screenshots/profit-loss.png'
+import screenshotContacts from '@/images/screenshots/focused-reading.png'
+import screenshotInventory from '@/images/screenshots/landing_notes.png'
+import screenshotProfitLoss from '@/images/screenshots/landing_save_anything.png'
 import React from 'react'
 
 interface Feature {
@@ -58,6 +58,13 @@ const features: Array<Feature> = [
       'Turn your saved data into actionable insights. By chatting with your data and using it with various agents, you can extract meaningful information and make informed decisions.',
     image: screenshotContacts,
 
+  },
+  {
+    name: 'Integration with Agents',
+    summary: 'Enhance productivity and insights with agent integration.',
+    description:
+      'Leverage your saved data with various agents for enhanced productivity and insights. Zetsy seamlessly integrates with tools and agents, enhancing your workflow and decision-making process.',
+    image: screenshotContacts,
   },
 ]
 
@@ -114,14 +121,14 @@ function FeaturesMobile() {
           <Feature feature={feature} className="mx-auto max-w-2xl" isActive />
           <div className="relative mt-10 pb-10">
             <div className="absolute -inset-x-4 bottom-0 top-8 bg-slate-200 sm:-inset-x-6" />
-            <div className="relative mx-auto w-[52.75rem] overflow-hidden rounded-xl bg-white shadow-lg shadow-slate-900/5 ring-1 ring-slate-500/10">
+            {/* <div className="relative mx-auto w-[52.75rem] overflow-hidden rounded-xl bg-white shadow-lg shadow-slate-900/5 ring-1 ring-slate-500/10">
               <Image
                 className="w-full"
                 src={feature.image}
                 alt=""
                 sizes="52.75rem"
               />
-            </div>
+            </div> */}
           </div>
         </div>
       ))}
@@ -152,7 +159,7 @@ function FeaturesDesktop() {
               />
             ))}
           </TabList>
-          <TabPanels className="relative mt-20 overflow-hidden rounded-4xl bg-slate-200 px-14 py-16 xl:px-16">
+          {/* <TabPanels className="relative mt-20 overflow-hidden rounded-4xl bg-slate-200 px-14 py-16 xl:px-16">
             <div className="-mx-5 flex">
               {features.map((feature, featureIndex) => (
                 <TabPanel
@@ -177,7 +184,7 @@ function FeaturesDesktop() {
               ))}
             </div>
             <div className="pointer-events-none absolute inset-0 rounded-4xl ring-1 ring-inset ring-slate-900/10" />
-          </TabPanels>
+          </TabPanels> */}
         </>
       )}
     </TabGroup>

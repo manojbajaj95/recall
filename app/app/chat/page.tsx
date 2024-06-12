@@ -2,15 +2,9 @@
 
 import { Button } from "@/components/tui/button"
 import { Description, Field, Label } from "@/components/tui/fieldset"
-import { Textarea } from "@/components/tui/textarea"
 import { useChat } from 'ai/react';
-import ReactMarkdown from 'react-markdown';
-
-import remarkGfm from 'remark-gfm';
-import remarkHtml from 'remark-html';
-import remarkBreaks from 'remark-breaks';
-import remarkMath from 'remark-math';
 import { Input } from "@/components/tui/input"
+import { MarkdownRenderer } from "@/components/Markdown";
 
 export default function Home() {
   const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
@@ -19,11 +13,11 @@ export default function Home() {
 
   return (
     <>
-      <main className="">
+      <main className="space-y-2 overflow-hidden">
         {messages.map(message => (
-          <div key={message.id}>
+          <div key={message.id} className="border rounded p-2">
             {message.role === 'user' ? 'User: ' : 'AI: '}
-            {message.content}
+            <MarkdownRenderer markdown={message.content} />
           </div>
         ))}
         <form className="space-y-2" onSubmit={handleSubmit}>

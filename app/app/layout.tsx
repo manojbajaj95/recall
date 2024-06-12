@@ -78,7 +78,7 @@ const NavbarComponent = () => {
             <Avatar src="https://api.dicebear.com/8.x/adventurer-neutral/svg" square />
           </DropdownButton>
           <DropdownMenu className="min-w-64" anchor="bottom end">
-            <DropdownItem href="/my-profile">
+            <DropdownItem href="/app/profile">
               <UserIcon />
               <DropdownLabel>My profile</DropdownLabel>
             </DropdownItem>
@@ -119,7 +119,7 @@ const SidebarComponent = ({ user }: any) => {
         </SidebarItem>
       </SidebarHeader>
       <SidebarBody>
-        <SidebarSection className="max-lg:hidden">
+        <SidebarSection >
           {sidebarItems.map((item) => (
             <SidebarItem href={item.href} key={item.label}>
               {item.icon}
@@ -211,7 +211,7 @@ export default async function AppLayout({
   const user = session.user
   return (
     <SidebarLayout
-      navbar={<></>}
+      navbar={<NavbarComponent />}
       sidebar={<SidebarComponent user={user} />}
     >
       {children}

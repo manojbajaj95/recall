@@ -1,7 +1,7 @@
 // @ts-nocheck
 'use server'
 
-import { embed, generateText } from 'ai'
+import { embed } from 'ai'
 import { openai } from '@ai-sdk/openai'
 import { createClient } from '@/lib/supabase/server'
 import { cookies } from 'next/headers'
@@ -9,6 +9,7 @@ import { RecursiveCharacterTextSplitter } from '@langchain/textsplitters'
 import { redirect } from 'next/navigation'
 import { Resend } from 'resend'
 import { WaitlistTemplate } from '@/components/email/waitlist-template'
+import { z } from 'zod';
 
 export type State = {
   status: 'success' | 'error'
@@ -25,10 +26,16 @@ export const createEmbed = async (prevState: State, formData: FormData): Promise
   }
 
   const url = formData.get('url') as string
-  if (!url) {
+
+
+  const urlSchema = z.string().url();
+
+  const urlValidation = urlSchema.safeParse(url);
+
+  if (!urlValidation.success || !url) {
     return {
       status: 'error',
-      message: 'Please provide a URL',
+      message: 'Please provide a valid URL',
     }
   }
 
@@ -62,7 +69,21 @@ export const createEmbed = async (prevState: State, formData: FormData): Promise
     }
   }
 
-  const slug = url.split('/').pop()?.split('.').shift()
+  const trimmedUrl = url.trim();
+  const urlParts = trimmedUrl.split('/');
+  let lastPart = urlParts.pop();
+  if (!lastPart) {
+    lastPart = urlParts.pop();
+  }
+  const slug = lastPart?.split('.').shift();
+  if (!slug) {
+    console.log(url.trim().split('/'))
+    console.log(url.trim().split('/').pop()?.split('.'))
+    return {
+      status: 'error',
+      message: 'Error uploading markdown',
+    }
+  }
 
   const { error: storageError } = await supabaseClient.storage
     .from(bucketName)
@@ -85,7 +106,7 @@ export const createEmbed = async (prevState: State, formData: FormData): Promise
     .insert({ path, type: 'website', source: url })
     .select('id')
   if (insertError) {
-    console.error('Error uploading markdown to Supabase Storage:', insertError)
+    console.error('Error saving to DB:', insertError)
     return {
       status: 'error',
       message: 'Error making Db entry',
