@@ -1,11 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
+import { Input } from '@/components/tui/input'
+import { Button } from '@/components/tui/button'
 import { signInWithEmail, type State } from './actions'
 import { useFormState as useActionState, useFormStatus } from 'react-dom'
-import { Label } from '@/components/ui/label'
+import { Field, Label, ErrorMessage } from '@/components/tui/fieldset'
 
 function SubmitEmail() {
   const { pending } = useFormStatus()
@@ -23,9 +23,11 @@ const SignUpEmail = () => {
     <form action={formAction}>
       <div className="grid gap-2">
         <div className="grid gap-1">
-          <Label>Email</Label>
-          <Input placeholder="johndoe@example.com" id="email" name="email" />
-          {state?.message}
+          <Field>
+            <Label>Email</Label>
+            <Input placeholder="johndoe@example.com" id="email" name="email" />
+            {state?.message && <ErrorMessage>{state.message}</ErrorMessage>}
+          </Field>
           <SubmitEmail />
         </div>
       </div>

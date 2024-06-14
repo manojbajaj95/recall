@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
-import { Button } from '@/components/ui/button'
-import { Container } from '@/components/Container'
+import { Button } from '@/components/tui/button'
+import { Container } from '@/components/tui/Container'
 import backgroundImage from '@/images/background-call-to-action.jpg'
 import Link from 'next/link'
 

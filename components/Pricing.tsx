@@ -1,8 +1,7 @@
 import clsx from 'clsx'
 
-import { Button } from '@/components/ui/button'
-import { Container } from '@/components/Container'
-import Link from 'next/link'
+import { Button } from '@/components/tui/button'
+import { Container } from '@/components/tui/Container'
 
 function SwirlyDoodle(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -51,7 +50,7 @@ function CheckIcon({
   )
 }
 
-function Plan({
+export function Plan({
   name,
   price,
   description,
@@ -101,7 +100,6 @@ function Plan({
       </ul>
       <Button
         href={href}
-        variant={featured ? 'solid' : 'outline'}
         color="white"
         className="mt-8"
         aria-label={`Get started with the ${name} plan for ${price}`}

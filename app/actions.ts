@@ -148,6 +148,13 @@ export const createEmbed = async (prevState: State, formData: FormData): Promise
   }
 }
 
+/**
+ * This function converts a website to text.
+ * It fetches the website content using a service and returns the text.
+ *
+ * @param {string} url - The URL of the website to convert to text.
+ * @returns {Promise<string>} The text content of the website.
+ */
 async function extractMd(url: string) {
   const response = await fetch(`https://md.dhr.wtf/?url=${url}&detailedResponse=true`, {
     headers: {
@@ -157,6 +164,24 @@ async function extractMd(url: string) {
   const text = await response.text()
   return text
 }
+
+/**
+ * This function converts a PDF to text.
+ * It fetches the PDF content using a service and returns the text.
+ *
+ * @param {string} url - The URL of the PDF to convert to text.
+ * @returns {Promise<string>} The text content of the PDF.
+ */
+async function extractPdf(url: string) {
+  const response = await fetch(`https://pdf-to-text.dhr.wtf/?url=${url}&detailedResponse=true`, {
+    headers: {
+      'Content-Type': 'text/plain',
+    },
+  })
+  const text = await response.text()
+  return text
+}
+
 
 export const getContext = async (query, match_count, match_threshold, min_content_length) => {
   const supabaseClient = createClient(cookies())

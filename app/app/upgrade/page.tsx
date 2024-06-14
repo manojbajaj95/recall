@@ -1,6 +1,6 @@
 "use client"
 
-import { Pricing } from "@/components/Pricing"
+import { Pricing, Plan } from "@/components/Pricing"
 
 
 export default function Home() {

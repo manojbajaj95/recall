@@ -11,10 +11,10 @@ import {
 } from '@headlessui/react'
 import clsx from 'clsx'
 
-import { Button } from '@/components/ui/button'
-import { Container } from '@/components/Container'
+import { Button } from '@/components/tui/button'
+import { Container } from '@/components/tui/Container'
 import { Logo } from '@/components/Logo'
-import { NavLink } from '@/components/NavLink'
+import { NavLink } from '@/components/tui/NavLink'
 
 const links = [
   { href: "#features", label: "Features" },

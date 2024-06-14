@@ -4,7 +4,7 @@ import Image, { type ImageProps } from 'next/image'
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
 import clsx from 'clsx'
 
-import { Container } from '@/components/Container'
+import { Container } from '@/components/tui/Container'
 import screenshotContacts from '@/images/screenshots/focused-reading.png'
 import screenshotInventory from '@/images/screenshots/landing_notes.png'
 import screenshotProfitLoss from '@/images/screenshots/landing_save_anything.png'

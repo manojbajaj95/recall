@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { Button } from '@/components/tui/button'
-import { Input } from '@/components/ui/input'
+import { Input } from '@/components/tui/input'
 import { Loader, Frown, CornerDownLeft, Search, Wand } from 'lucide-react'
 import { useFormState as useActionState, useFormStatus } from 'react-dom'
 import { Field, Label } from '@/components/tui/fieldset'

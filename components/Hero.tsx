@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { Button } from '@/components/tui/button'
-import { Container } from '@/components/Container'
+import { Container } from '@/components/tui/Container'
 import logoLaravel from '@/images/logos/laravel.svg'
 import logoMirage from '@/images/logos/mirage.svg'
 import logoStatamic from '@/images/logos/statamic.svg'
