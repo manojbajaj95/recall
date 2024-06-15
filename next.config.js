@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const { withContentlayer } = require('next-contentlayer')
+
 const nextConfig = {
   // experimental: {
   //   reactCompiler: true,
@@ -18,4 +20,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = withContentlayer(nextConfig)

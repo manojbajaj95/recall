@@ -1,13 +1,15 @@
 import { Button } from '@/components/tui/button'
+import { Heading } from '@/components/tui/heading'
 import { createClient } from '@/lib/supabase/server'
 import { LinkIcon } from '@heroicons/react/20/solid'
 import { cookies } from 'next/headers'
+import { cache } from 'react'
 import { CreateCollection, DeleteSource, MoveCollection } from './collection'
 
 const RenderCollection = ({ collection_name, sources, collections }: any) => {
   return (
     <>
-      <p>{collection_name}</p>
+      <Heading>{collection_name}</Heading>
       {sources.map((source, index) => (
         <div key={index} className="flex justify-between rounded border p-2">
           <div>
@@ -29,7 +31,7 @@ const RenderCollection = ({ collection_name, sources, collections }: any) => {
 }
 
 export default async function Library() {
-  const getCollections = async () => {
+  const getCollections = cache(async () => {
     const client = createClient(cookies())
     const { data, error } = await client.from('collections').select(`id, collection_name`)
     if (error) {
@@ -37,9 +39,9 @@ export default async function Library() {
       return []
     }
     return data
-  }
+  })
 
-  const getSources = async () => {
+  const getSources = cache(async () => {
     let acc: Record<string, []> = {}
     const client = createClient(cookies())
     const { data, error } = await client.from('sources').select(`id, type, source , collection(id, collection_name)`)
@@ -55,7 +57,7 @@ export default async function Library() {
       acc[collectionName].push(source)
     })
     return acc
-  }
+  })
 
   const sources = await getSources()
   const collections = await getCollections()

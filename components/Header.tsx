@@ -8,11 +8,14 @@ import { Logo } from '@/components/Logo'
 import { NavLink } from '@/components/tui/NavLink'
 import { Button } from '@/components/tui/button'
 import { Container } from '@/components/tui/container'
+import { Heading } from './tui/heading'
 
 const links = [
-  { href: '#features', label: 'Features' },
-  // { href: "#testimonials", label: "Testimonials" },
-  { href: '#pricing', label: 'Pricing' },
+  { href: '/about', label: 'About' },
+  { href: '/#features', label: 'Features' },
+  { href: "/#testimonials", label: "Testimonials" },
+  { href: '/#pricing', label: 'Pricing' },
+  { href: '/#faq', label: 'FAQ' },
 ]
 
 function MobileNavLink({ href, children }: { href: string; children: React.ReactNode }) {
@@ -86,8 +89,9 @@ export function Header() {
       <Container>
         <nav className="relative z-50 flex justify-between">
           <div className="flex items-center md:gap-x-12">
-            <Link href="#" aria-label="Home">
+            <Link href="/#" aria-label="Home" className='flex items-center'>
               <Logo className="h-10 w-auto" />
+              <Heading>Zetsy</Heading>
             </Link>
             <div className="hidden md:flex md:gap-x-6">
               {links.map((link) => (
