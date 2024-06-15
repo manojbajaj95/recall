@@ -1,3 +1,1 @@
-const marketingConfig = {
-
-}
+const marketingConfig = {}

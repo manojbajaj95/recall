@@ -1,15 +1,15 @@
 // @ts-nocheck
 'use server'
 
-import { embed } from 'ai'
-import { openai } from '@ai-sdk/openai'
+import { WaitlistTemplate } from '@/components/email/waitlist-template'
 import { createClient } from '@/lib/supabase/server'
-import { cookies } from 'next/headers'
+import { openai } from '@ai-sdk/openai'
 import { RecursiveCharacterTextSplitter } from '@langchain/textsplitters'
+import { embed } from 'ai'
+import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { Resend } from 'resend'
-import { WaitlistTemplate } from '@/components/email/waitlist-template'
-import { z } from 'zod';
+import { z } from 'zod'
 
 export type State = {
   status: 'success' | 'error'
@@ -27,10 +27,9 @@ export const createEmbed = async (prevState: State, formData: FormData): Promise
 
   const url = formData.get('url') as string
 
+  const urlSchema = z.string().url()
 
-  const urlSchema = z.string().url();
-
-  const urlValidation = urlSchema.safeParse(url);
+  const urlValidation = urlSchema.safeParse(url)
 
   if (!urlValidation.success || !url) {
     return {
@@ -69,13 +68,13 @@ export const createEmbed = async (prevState: State, formData: FormData): Promise
     }
   }
 
-  const trimmedUrl = url.trim();
-  const urlParts = trimmedUrl.split('/');
-  let lastPart = urlParts.pop();
+  const trimmedUrl = url.trim()
+  const urlParts = trimmedUrl.split('/')
+  let lastPart = urlParts.pop()
   if (!lastPart) {
-    lastPart = urlParts.pop();
+    lastPart = urlParts.pop()
   }
-  const slug = lastPart?.split('.').shift();
+  const slug = lastPart?.split('.').shift()
   if (!slug) {
     console.log(url.trim().split('/'))
     console.log(url.trim().split('/').pop()?.split('.'))
@@ -85,11 +84,9 @@ export const createEmbed = async (prevState: State, formData: FormData): Promise
     }
   }
 
-  const { error: storageError } = await supabaseClient.storage
-    .from(bucketName)
-    .upload(`${slug}.md`, text, {
-      contentType: 'text/markdown',
-    })
+  const { error: storageError } = await supabaseClient.storage.from(bucketName).upload(`${slug}.md`, text, {
+    contentType: 'text/markdown',
+  })
   const path = `/${bucketName}/${slug}.md`
 
   if (storageError) {
@@ -182,7 +179,6 @@ async function extractPdf(url: string) {
   return text
 }
 
-
 export const getContext = async (query, match_count, match_threshold, min_content_length) => {
   const supabaseClient = createClient(cookies())
 
@@ -196,15 +192,12 @@ export const getContext = async (query, match_count, match_threshold, min_conten
   })
 
   // @ts-ignore
-  const { error: matchError, data: pageSections } = await supabaseClient.rpc(
-    'match_page_sections',
-    {
-      embedding,
-      match_count: match_count || 3,
-      match_threshold: match_threshold || 0.5,
-      min_content_length: min_content_length || 50,
-    }
-  )
+  const { error: matchError, data: pageSections } = await supabaseClient.rpc('match_page_sections', {
+    embedding,
+    match_count: match_count || 3,
+    match_threshold: match_threshold || 0.5,
+    min_content_length: min_content_length || 50,
+  })
 
   if (matchError) {
     console.error('Error fetching sections:', matchError)
@@ -232,7 +225,6 @@ export const getRelevantContent = async (prevState: State, formData: FormData): 
     }
   }
 
-
   const contextText = await getContext(query, match_count, match_threshold, min_content_length)
   // console.log(contextText)
   return {
@@ -242,12 +234,12 @@ export const getRelevantContent = async (prevState: State, formData: FormData): 
 }
 
 export const addToWailistAudience = async (email: string) => {
-  const resend = new Resend(process.env.RESEND_API_KEY);
+  const resend = new Resend(process.env.RESEND_API_KEY)
   const { data, error } = await resend.contacts.create({
     email: email,
     unsubscribed: false,
-    audienceId: process.env.RESEND_AUDIENCE || "",
-  });
+    audienceId: process.env.RESEND_AUDIENCE || '',
+  })
   if (error) {
     console.error(error)
     return false
@@ -255,16 +247,15 @@ export const addToWailistAudience = async (email: string) => {
   return true
 }
 
-
 export const sendWaitlistMail = async (email: string) => {
-  const resend = new Resend(process.env.RESEND_API_KEY);
+  const resend = new Resend(process.env.RESEND_API_KEY)
   // Send to user mentioning they have been added to the waitlist
   const { data, error } = await resend.emails.send({
     from: 'hello@zetsy.dev',
     to: [email],
     subject: 'Welcome to Zetsy',
-    react: WaitlistTemplate({ email: email })
-  });
+    react: WaitlistTemplate({ email: email }),
+  })
   if (error) {
     console.error(error)
     return false
@@ -272,14 +263,13 @@ export const sendWaitlistMail = async (email: string) => {
   return true
 }
 
-
 export async function addWaitlist(prevState: State, formData: FormData): Promise<State> {
-  const email = formData.get("email") as string
+  const email = formData.get('email') as string
   // console.log(email)
   await sendWaitlistMail(email)
   await addToWailistAudience(email)
   return {
-    status: "success",
+    status: 'success',
     message: 'You are now added to waitlist. Check your email for further instructions.',
   }
 }

@@ -5,12 +5,7 @@ import { type Config } from 'tailwindcss'
 
 module.exports = {
   darkMode: ['class'],
-  content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-  ],
+  content: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
   prefix: '',
   theme: {
     fontSize: {
@@ -41,5 +36,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate'), formsPlugin, headlessuiPlugin, require('@tailwindcss/typography'),],
+  plugins: [require('tailwindcss-animate'), formsPlugin, headlessuiPlugin, require('@tailwindcss/typography')],
 } satisfies Config

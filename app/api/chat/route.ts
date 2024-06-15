@@ -1,17 +1,17 @@
-import { type CoreMessage, streamText } from 'ai';
-import { openai } from '@ai-sdk/openai';
-import { getContext } from '@/app/actions';
+import { getContext } from '@/app/actions'
+import { openai } from '@ai-sdk/openai'
+import { streamText, type CoreMessage } from 'ai'
 
 // Allow streaming responses up to 30 seconds
-export const maxDuration = 30;
+export const maxDuration = 30
 
 export async function POST(req: Request) {
-  const { messages }: { messages: CoreMessage[] } = await req.json();
-  const currentMessageContent = messages[messages.length - 1].content;
-  let context = ""
+  const { messages }: { messages: CoreMessage[] } = await req.json()
+  const currentMessageContent = messages[messages.length - 1].content
+  let context = ''
   if (typeof currentMessageContent === 'string') {
-    const contexts = await getContext(currentMessageContent, 3, 0.5, 100);
-    context = contexts.join('. ');
+    const contexts = await getContext(currentMessageContent, 3, 0.5, 100)
+    context = contexts.join('. ')
   }
 
   const result = await streamText({
@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     </context>
     `,
     messages,
-  });
+  })
 
-  return result.toAIStreamResponse();
+  return result.toAIStreamResponse()
 }

@@ -1,9 +1,9 @@
 import * as Headless from '@headlessui/react'
 import clsx from 'clsx'
+import Image from 'next/image'
 import React from 'react'
 import { TouchTarget } from './button'
 import { Link } from './link'
-import Image from 'next/image'
 
 type AvatarProps = {
   src?: string | null

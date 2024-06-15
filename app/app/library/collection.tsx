@@ -1,14 +1,14 @@
-"use client"
+'use client'
 
 import { Button } from '@/components/tui/button'
 import { Dialog, DialogActions, DialogBody, DialogDescription, DialogTitle } from '@/components/tui/dialog'
-import { Description, Field, Label } from "@/components/tui/fieldset"
+import { Description, Field, Label } from '@/components/tui/fieldset'
 import { Input } from '@/components/tui/input'
-import { useState } from "react"
-import { createCollection, deleteSource, moveToCollection } from './actions'
-import { useFormState as useActionState, useFormStatus } from 'react-dom'
 import { Select } from '@/components/tui/select'
 import { TrashIcon } from '@heroicons/react/20/solid'
+import { useState } from 'react'
+import { useFormState as useActionState } from 'react-dom'
+import { createCollection, deleteSource, moveToCollection } from './actions'
 
 export const CreateCollection = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -18,9 +18,7 @@ export const CreateCollection = () => {
       <Button onClick={() => setIsOpen(true)}>Create Collection</Button>
       <Dialog open={isOpen} onClose={setIsOpen}>
         <DialogTitle>Create Collection</DialogTitle>
-        <DialogDescription>
-          Create a collection to organize your data
-        </DialogDescription>
+        <DialogDescription>Create a collection to organize your data</DialogDescription>
         <form action={formAction}>
           <DialogBody>
             <Field>
@@ -33,13 +31,12 @@ export const CreateCollection = () => {
               <Description>Small description about your collection</Description>
               <Input name="description" placeholder="default" />
             </Field>
-
           </DialogBody>
           <DialogActions>
             <Button plain onClick={() => setIsOpen(false)}>
               Cancel
             </Button>
-            <Button type='submit'>Create</Button>
+            <Button type="submit">Create</Button>
           </DialogActions>
         </form>
       </Dialog>
@@ -47,7 +44,13 @@ export const CreateCollection = () => {
   )
 }
 
-export const MoveCollection = ({ source, collections }: { source: number, collections: { id: number, collection_name: string }[] }) => {
+export const MoveCollection = ({
+  source,
+  collections,
+}: {
+  source: number
+  collections: { id: number; collection_name: string }[]
+}) => {
   const [isOpen, setIsOpen] = useState(false)
   const [state, formAction] = useActionState(moveToCollection.bind(null, source), null)
   return (
@@ -55,9 +58,7 @@ export const MoveCollection = ({ source, collections }: { source: number, collec
       <Button onClick={() => setIsOpen(true)}>Move to Collection</Button>
       <Dialog open={isOpen} onClose={setIsOpen}>
         <DialogTitle>Move to a Collection</DialogTitle>
-        <DialogDescription>
-          Organize your sources by moving them to collection
-        </DialogDescription>
+        <DialogDescription>Organize your sources by moving them to collection</DialogDescription>
         <form action={formAction}>
           <DialogBody>
             <Field>
@@ -65,7 +66,9 @@ export const MoveCollection = ({ source, collections }: { source: number, collec
               <Description>Give a name to your collection</Description>
               <Select name="collection">
                 {collections.map((collection) => (
-                  <option value={collection.id} key={collection.id}>{collection.collection_name}</option>
+                  <option value={collection.id} key={collection.id}>
+                    {collection.collection_name}
+                  </option>
                 ))}
               </Select>
             </Field>
@@ -74,7 +77,7 @@ export const MoveCollection = ({ source, collections }: { source: number, collec
             <Button plain onClick={() => setIsOpen(false)}>
               Cancel
             </Button>
-            <Button type='submit'>Create</Button>
+            <Button type="submit">Create</Button>
           </DialogActions>
         </form>
       </Dialog>
@@ -87,18 +90,18 @@ export const DeleteSource = ({ source }: { source: number }) => {
   const [state, formAction] = useActionState(deleteSource.bind(null, source), null)
   return (
     <>
-      <Button outline onClick={() => setIsOpen(true)}>Delete <TrashIcon /></Button>
+      <Button outline onClick={() => setIsOpen(true)}>
+        Delete <TrashIcon />
+      </Button>
       <Dialog open={isOpen} onClose={setIsOpen}>
         <DialogTitle>Delete Source</DialogTitle>
-        <DialogDescription>
-          Delete a source from your library
-        </DialogDescription>
+        <DialogDescription>Delete a source from your library</DialogDescription>
         <DialogActions>
           <form action={formAction}>
             <Button plain onClick={() => setIsOpen(false)}>
               Cancel
             </Button>
-            <Button type='submit'>Submit</Button>
+            <Button type="submit">Submit</Button>
           </form>
         </DialogActions>
       </Dialog>

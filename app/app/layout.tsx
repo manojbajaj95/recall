@@ -1,3 +1,4 @@
+import { Logo } from '@/components/Logo'
 import { Avatar } from '@/components/tui/avatar'
 import {
   Dropdown,
@@ -7,52 +8,49 @@ import {
   DropdownLabel,
   DropdownMenu,
 } from '@/components/tui/dropdown'
-import { SidebarLayout } from '@/components/tui/sidebar-layout'
 import { Navbar, NavbarItem, NavbarSection, NavbarSpacer } from '@/components/tui/navbar'
 import {
   Sidebar,
   SidebarBody,
   SidebarFooter,
   SidebarHeader,
-  SidebarHeading,
   SidebarItem,
   SidebarLabel,
   SidebarSection,
   SidebarSpacer,
 } from '@/components/tui/sidebar'
+import { SidebarLayout } from '@/components/tui/sidebar-layout'
+import { createClient } from '@/lib/supabase/server'
 import {
-  InboxIcon,
-  MagnifyingGlassIcon,
-  QuestionMarkCircleIcon,
-  SparklesIcon,
-  ChatBubbleLeftEllipsisIcon,
-  BookmarkIcon,
-  UserIcon,
   ArrowRightStartOnRectangleIcon,
+  BookmarkIcon,
+  ChatBubbleLeftEllipsisIcon,
   ChevronUpIcon,
   Cog8ToothIcon,
+  InboxIcon,
   LightBulbIcon,
+  MagnifyingGlassIcon,
+  QuestionMarkCircleIcon,
   ShieldCheckIcon,
+  SparklesIcon,
+  UserIcon,
 } from '@heroicons/react/20/solid'
-import { createClient } from '@/lib/supabase/server'
 import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
-import { Logo } from '@/components/Logo'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
 type SidebarItem = {
-  href: string;
-  icon: JSX.Element;
-  label: string;
-};
+  href: string
+  icon: JSX.Element
+  label: string
+}
 
 const sidebarItems: SidebarItem[] = [
-  { href: "/app/search", icon: <MagnifyingGlassIcon />, label: "Search" },
-  { href: "/app/upload", icon: <InboxIcon />, label: "Upload" },
-  { href: "/app/chat", icon: <ChatBubbleLeftEllipsisIcon />, label: "Chat" },
-  { href: "/app/library", icon: <BookmarkIcon />, label: "Library" },
-];
-
+  { href: '/app/search', icon: <MagnifyingGlassIcon />, label: 'Search' },
+  { href: '/app/upload', icon: <InboxIcon />, label: 'Upload' },
+  { href: '/app/chat', icon: <ChatBubbleLeftEllipsisIcon />, label: 'Chat' },
+  { href: '/app/library', icon: <BookmarkIcon />, label: 'Library' },
+]
 
 const sidebarItems2: SidebarItem[] = [
   // { href: "/", icon: <HomeIcon />, label: "Home" },
@@ -119,7 +117,7 @@ const SidebarComponent = ({ user }: any) => {
         </SidebarItem>
       </SidebarHeader>
       <SidebarBody>
-        <SidebarSection >
+        <SidebarSection>
           {sidebarItems.map((item) => (
             <SidebarItem href={item.href} key={item.label}>
               {item.icon}
@@ -204,16 +202,15 @@ export default async function AppLayout({
   children: React.ReactNode
 }>) {
   const client = createClient(cookies())
-  const { data: { session } } = await client.auth.getSession()
+  const {
+    data: { session },
+  } = await client.auth.getSession()
   if (!session) {
-    redirect("/auth/login")
+    redirect('/auth/login')
   }
   const user = session.user
   return (
-    <SidebarLayout
-      navbar={<NavbarComponent />}
-      sidebar={<SidebarComponent user={user} />}
-    >
+    <SidebarLayout navbar={<NavbarComponent />} sidebar={<SidebarComponent user={user} />}>
       {children}
     </SidebarLayout>
   )

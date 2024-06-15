@@ -32,7 +32,7 @@ export default function OtpVerify({
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col space-y-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">Create an account</h1>
-          <p className="text-sm text-muted-foreground">Enter the 6 Digit OTP sent to your phone</p>
+          <p className="text-muted-foreground text-sm">Enter the 6 Digit OTP sent to your phone</p>
         </div>
         <div className="w-full">
           <form action={onSubmit}>
@@ -49,7 +49,7 @@ export default function OtpVerify({
                 <InputOTPSlot index={5} />
               </InputOTPGroup>
             </InputOTP>
-            <Button className="w-full mt-6">Submit</Button>
+            <Button className="mt-6 w-full">Submit</Button>
           </form>
         </div>
       </div>

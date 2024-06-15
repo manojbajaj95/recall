@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import './globals.css'
 // import { ThemeProvider } from '@/components/theme-provider'
-import { Inter, Lexend } from 'next/font/google'
-import { cn } from '@/lib/utils'
 import { CSPostHogProvider } from '@/components/Posthog'
+import { cn } from '@/lib/utils'
+import { Inter, Lexend } from 'next/font/google'
 
 export const metadata: Metadata = {
   title: 'Zetsy',
@@ -28,15 +28,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={cn(
-      'h-full scroll-smooth bg-white antialiased',
-      inter.variable,
-      lexend.variable,
-    )}>
+    <html lang="en" className={cn('h-full scroll-smooth bg-white antialiased', inter.variable, lexend.variable)}>
       <CSPostHogProvider>
-        <body className="flex h-full flex-col">
-          {children}
-        </body>
+        <body className="flex h-full flex-col">{children}</body>
       </CSPostHogProvider>
     </html>
   )

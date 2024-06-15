@@ -1,36 +1,34 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import Image from 'next/image'
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
 import clsx from 'clsx'
+import Image from 'next/image'
+import { useEffect, useState } from 'react'
 
-import { Container } from '@/components/tui/Container'
+import { Container } from '@/components/tui/container'
 import backgroundImage from '@/images/background-features.jpg'
-import remember from '@/images/screenshots/remember.png'
-import screenshotPayroll from '@/images/screenshots/sync.png'
-import save from '@/images/screenshots/save_anything.png'
 import chat from '@/images/screenshots/landing_notes.png'
 import reading from '@/images/screenshots/reading-nook.png'
-import React from 'react'
+import remember from '@/images/screenshots/remember.png'
+import save from '@/images/screenshots/save_anything.png'
 
 const features = [
   {
     title: 'Seamless Saving',
     description:
-      "Easily save links to your favorite blogs, tweets, YouTube videos, and more. With Zetsy, all your online discoveries are just a click away.",
+      'Easily save links to your favorite blogs, tweets, YouTube videos, and more. With Zetsy, all your online discoveries are just a click away.',
     image: save,
   },
   {
     title: 'Personal Notes & Documents',
     description:
-      "Store your personal notes and private documents securely. Whether it’s a brainstorming session or important paperwork, Zetsy keeps everything safe and accessible.",
+      'Store your personal notes and private documents securely. Whether it’s a brainstorming session or important paperwork, Zetsy keeps everything safe and accessible.',
     image: reading,
   },
   {
     title: 'Intelligent Search',
     description:
-      "Find what you need when you need it. Our advanced search functionality allows you to quickly locate any saved content, from the latest articles to your private notes.",
+      'Find what you need when you need it. Our advanced search functionality allows you to quickly locate any saved content, from the latest articles to your private notes.',
     image: remember,
   },
   {
@@ -39,16 +37,13 @@ const features = [
       'Engage in meaningful conversations with your stored information. Whether you need a summary or specific details, Zetsy’s chat feature makes interacting with your data simple and intuitive.',
     image: chat,
   },
-
 ]
 
-const title = "Powerful and Private Memory";
-const description = "";
+const title = 'Powerful and Private Memory'
+const description = ''
 
 export function PrimaryFeatures() {
-  let [tabOrientation, setTabOrientation] = useState<'horizontal' | 'vertical'>(
-    'horizontal',
-  )
+  let [tabOrientation, setTabOrientation] = useState<'horizontal' | 'vertical'>('horizontal')
 
   useEffect(() => {
     let lgMediaQuery = window.matchMedia('(min-width: 1024px)')
@@ -81,14 +76,8 @@ export function PrimaryFeatures() {
       />
       <Container className="relative">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
-
-
-          <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl md:text-5xl">
-            {title}
-          </h2>
-          <p className="mt-6 text-lg tracking-tight text-blue-100">
-            {description}
-          </p>
+          <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl md:text-5xl">{title}</h2>
+          <p className="mt-6 text-lg tracking-tight text-blue-100">{description}</p>
         </div>
         <TabGroup
           className="mt-16 grid grid-cols-1 items-center gap-y-2 pt-10 sm:gap-y-6 md:mt-20 lg:grid-cols-12 lg:pt-0"
@@ -105,7 +94,7 @@ export function PrimaryFeatures() {
                         'group relative rounded-full px-4 py-1 lg:rounded-l-xl lg:rounded-r-none lg:p-6',
                         selectedIndex === featureIndex
                           ? 'bg-white lg:bg-white/10 lg:ring-1 lg:ring-inset lg:ring-white/10'
-                          : 'hover:bg-white/10 lg:hover:bg-white/5',
+                          : 'hover:bg-white/10 lg:hover:bg-white/5'
                       )}
                     >
                       <h3>
@@ -114,7 +103,7 @@ export function PrimaryFeatures() {
                             'font-display text-lg ui-not-focus-visible:outline-none',
                             selectedIndex === featureIndex
                               ? 'text-blue-600 lg:text-white'
-                              : 'text-blue-100 hover:text-white lg:text-white',
+                              : 'text-blue-100 hover:text-white lg:text-white'
                           )}
                         >
                           <span className="absolute inset-0 rounded-full lg:rounded-l-xl lg:rounded-r-none" />
@@ -124,9 +113,7 @@ export function PrimaryFeatures() {
                       <p
                         className={clsx(
                           'mt-2 hidden text-sm lg:block',
-                          selectedIndex === featureIndex
-                            ? 'text-white'
-                            : 'text-blue-100 group-hover:text-white',
+                          selectedIndex === featureIndex ? 'text-white' : 'text-blue-100 group-hover:text-white'
                         )}
                       >
                         {feature.description}

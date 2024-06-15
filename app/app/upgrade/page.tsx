@@ -1,14 +1,11 @@
-"use client"
+'use client'
 
-import { Pricing, Plan } from "@/components/Pricing"
-
+import { Pricing } from '@/components/Pricing'
 
 export default function Home() {
-
   return (
     <>
       <Pricing />
     </>
   )
 }
-

@@ -1,15 +1,15 @@
-"use client"
+'use client'
 
-import { Input } from "@/components/tui/input"
-import { Description, Field, FieldGroup, Fieldset, Label, Legend } from '@/components/tui/fieldset'
-import { Button } from "@/components/tui/button"
+import { createEmbed } from '@/app/actions'
+import { Button } from '@/components/tui/button'
+import { Field, FieldGroup, Label } from '@/components/tui/fieldset'
+import { Input } from '@/components/tui/input'
 import { useFormState as useActionState, useFormStatus } from 'react-dom'
-import { createEmbed } from "@/app/actions"
 
 type Profile = {
-  first_name: string,
-  last_name: string,
-  email: string,
+  first_name: string
+  last_name: string
+  email: string
 }
 
 export default function Home() {
@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="flex flex-col justify-between items-center p-24 h-full">
+      <main className="flex h-full flex-col items-center justify-between p-24">
         <form action={formAction}>
           <div className="flex flex-col">
             <FieldGroup>
@@ -45,4 +45,3 @@ export default function Home() {
     </>
   )
 }
-

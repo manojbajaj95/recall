@@ -1,35 +1,21 @@
 'use client'
 
-import Link from 'next/link'
-import {
-  Popover,
-  PopoverButton,
-  PopoverOverlay,
-  PopoverPanel,
-  Transition,
-  TransitionChild,
-} from '@headlessui/react'
+import { Popover, PopoverButton, PopoverOverlay, PopoverPanel, Transition, TransitionChild } from '@headlessui/react'
 import clsx from 'clsx'
+import Link from 'next/link'
 
-import { Button } from '@/components/tui/button'
-import { Container } from '@/components/tui/Container'
 import { Logo } from '@/components/Logo'
 import { NavLink } from '@/components/tui/NavLink'
+import { Button } from '@/components/tui/button'
+import { Container } from '@/components/tui/container'
 
 const links = [
-  { href: "#features", label: "Features" },
+  { href: '#features', label: 'Features' },
   // { href: "#testimonials", label: "Testimonials" },
-  { href: "#pricing", label: "Pricing" }
-];
+  { href: '#pricing', label: 'Pricing' },
+]
 
-
-function MobileNavLink({
-  href,
-  children,
-}: {
-  href: string
-  children: React.ReactNode
-}) {
+function MobileNavLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
     <PopoverButton as={Link} href={href} className="block w-full p-2">
       {children}
@@ -46,20 +32,8 @@ function MobileNavIcon({ open }: { open: boolean }) {
       strokeWidth={2}
       strokeLinecap="round"
     >
-      <path
-        d="M0 1H14M0 7H14M0 13H14"
-        className={clsx(
-          'origin-center transition',
-          open && 'scale-90 opacity-0',
-        )}
-      />
-      <path
-        d="M2 2L12 12M12 2L2 12"
-        className={clsx(
-          'origin-center transition',
-          !open && 'scale-90 opacity-0',
-        )}
-      />
+      <path d="M0 1H14M0 7H14M0 13H14" className={clsx('origin-center transition', open && 'scale-90 opacity-0')} />
+      <path d="M2 2L12 12M12 2L2 12" className={clsx('origin-center transition', !open && 'scale-90 opacity-0')} />
     </svg>
   )
 }
@@ -94,7 +68,9 @@ function MobileNavigation() {
         >
           <PopoverPanel className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl bg-white p-4 text-lg tracking-tight text-slate-900 shadow-xl ring-1 ring-slate-900/5">
             {links.map((link) => (
-              <MobileNavLink href={link.href} key={link.label}>{link.label}</MobileNavLink>
+              <MobileNavLink href={link.href} key={link.label}>
+                {link.label}
+              </MobileNavLink>
             ))}
             <hr className="m-2 border-slate-300/40" />
           </PopoverPanel>
@@ -115,7 +91,9 @@ export function Header() {
             </Link>
             <div className="hidden md:flex md:gap-x-6">
               {links.map((link) => (
-                <NavLink href={link.href} key={link.label}>{link.label}</NavLink>
+                <NavLink href={link.href} key={link.label}>
+                  {link.label}
+                </NavLink>
               ))}
             </div>
           </div>

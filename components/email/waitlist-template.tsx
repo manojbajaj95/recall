@@ -1,13 +1,11 @@
-import * as React from 'react';
+import * as React from 'react'
 // import { LinkedInLogoIcon, TwitterLogoIcon } from '@radix-ui/react-icons'
 
 interface EmailTemplateProps {
-  email: string;
+  email: string
 }
 
-export const WaitlistTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
-  email,
-}) => (
+export const WaitlistTemplate: React.FC<Readonly<EmailTemplateProps>> = ({ email }) => (
   <>
     <div>
       <h3>Welcome, {email}!</h3>
@@ -34,4 +32,4 @@ export const WaitlistTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
       </div>
     </footer> */}
   </>
-);
+)

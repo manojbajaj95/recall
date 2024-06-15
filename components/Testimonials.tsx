@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { Container } from '@/components/tui/Container'
+import { Container } from '@/components/tui/container'
 import avatarImage1 from '@/images/avatars/avatar-1.png'
 import avatarImage2 from '@/images/avatars/avatar-2.png'
 import avatarImage3 from '@/images/avatars/avatar-3.png'
@@ -80,20 +80,15 @@ function QuoteIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 
 export function Testimonials() {
   return (
-    <section
-      id="testimonials"
-      aria-label="What our customers are saying"
-      className="bg-slate-50 py-20 sm:py-32"
-    >
+    <section id="testimonials" aria-label="What our customers are saying" className="bg-slate-50 py-20 sm:py-32">
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
           <h2 className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl">
             Loved by businesses worldwide.
           </h2>
           <p className="mt-4 text-lg tracking-tight text-slate-700">
-            Our software is so simple that people can’t help but fall in love
-            with it. Simplicity is easy when you just skip tons of
-            mission-critical features.
+            Our software is so simple that people can’t help but fall in love with it. Simplicity is easy when you just
+            skip tons of mission-critical features.
           </p>
         </div>
         <ul
@@ -108,18 +103,12 @@ export function Testimonials() {
                     <figure className="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
                       <QuoteIcon className="absolute left-6 top-6 fill-slate-100" />
                       <blockquote className="relative">
-                        <p className="text-lg tracking-tight text-slate-900">
-                          {testimonial.content}
-                        </p>
+                        <p className="text-lg tracking-tight text-slate-900">{testimonial.content}</p>
                       </blockquote>
                       <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
                         <div>
-                          <div className="font-display text-base text-slate-900">
-                            {testimonial.author.name}
-                          </div>
-                          <div className="mt-1 text-sm text-slate-500">
-                            {testimonial.author.role}
-                          </div>
+                          <div className="font-display text-base text-slate-900">{testimonial.author.name}</div>
+                          <div className="mt-1 text-sm text-slate-500">{testimonial.author.role}</div>
                         </div>
                         <div className="overflow-hidden rounded-full bg-slate-50">
                           <Image

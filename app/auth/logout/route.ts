@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { cookies } from 'next/headers'
-import { type NextRequest, NextResponse } from 'next/server'
+import { NextResponse, type NextRequest } from 'next/server'
 
 export async function POST(req: NextRequest) {
   const cookieStore = cookies()

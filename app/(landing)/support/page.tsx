@@ -1,11 +1,8 @@
 'use client'
-import { Button } from '@/components/tui/button';
-import { useState } from 'react';
-import { BuildingOffice2Icon, EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline'
 
 export default function Example() {
   return (
-    <div className="relative isolate bg-white h-full">
+    <div className="relative isolate h-full bg-white">
       <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
         <div className="relative px-6 pb-20 pt-24 sm:pt-32 lg:static lg:px-8 lg:py-48">
           <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
@@ -35,7 +32,8 @@ export default function Example() {
             </div>
             <h2 className="text-3xl font-bold tracking-tight text-gray-900">Get in touch</h2>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              If you have any questions or need further assistance, please don't hesitate to reach out to us. Our team is here to help you with any concerns or inquiries you may have.
+              If you have any questions or need further assistance, please don't hesitate to reach out to us. Our team
+              is here to help you with any concerns or inquiries you may have.
             </p>
             {/* <dl className="mt-10 space-y-4 text-base leading-7 text-gray-600">
               <div className="flex gap-x-4">

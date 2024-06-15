@@ -62,11 +62,14 @@ export function SidebarLayout({
   navbar,
   sidebar,
   children,
-}: React.PropsWithChildren<{ navbar: React.ReactNode; sidebar: React.ReactNode }>) {
+}: React.PropsWithChildren<{
+  navbar: React.ReactNode
+  sidebar: React.ReactNode
+}>) {
   let [showSidebar, setShowSidebar] = useState(false)
 
   return (
-    <div className="relative isolate flex min-h-svh w-full bg-white max-lg:flex-col lg:bg-zinc-100 dark:bg-zinc-900 dark:lg:bg-zinc-950">
+    <div className="relative isolate flex min-h-svh w-full bg-white dark:bg-zinc-900 max-lg:flex-col lg:bg-zinc-100 dark:lg:bg-zinc-950">
       {/* Sidebar on desktop */}
       <div className="fixed inset-y-0 left-0 w-64 max-lg:hidden">{sidebar}</div>
 

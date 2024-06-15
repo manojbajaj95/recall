@@ -1,11 +1,11 @@
 'use client'
 
-import Link from 'next/link'
-import { Input } from '@/components/tui/input'
 import { Button } from '@/components/tui/button'
-import { signInWithEmail, type State } from './actions'
+import { ErrorMessage, Field, Label } from '@/components/tui/fieldset'
+import { Input } from '@/components/tui/input'
+import Link from 'next/link'
 import { useFormState as useActionState, useFormStatus } from 'react-dom'
-import { Field, Label, ErrorMessage } from '@/components/tui/fieldset'
+import { signInWithEmail, type State } from './actions'
 
 function SubmitEmail() {
   const { pending } = useFormStatus()
@@ -41,18 +41,18 @@ export default function AuthenticationPage() {
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col space-y-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">Sign Up</h1>
-          <p className="text-sm text-muted-foreground">Recall is currently invite only. Please use the same email</p>
+          <p className="text-muted-foreground text-sm">Recall is currently invite only. Please use the same email</p>
         </div>
         <div>
           <SignUpEmail />
         </div>
-        <p className="px-8 text-center text-sm text-muted-foreground">
+        <p className="text-muted-foreground px-8 text-center text-sm">
           By clicking continue, you agree to our{' '}
-          <Link href="/terms" className="underline underline-offset-4 hover:text-primary">
+          <Link href="/terms" className="hover:text-primary underline underline-offset-4">
             Terms of Service
           </Link>{' '}
           and{' '}
-          <Link href="/privacy" className="underline underline-offset-4 hover:text-primary">
+          <Link href="/privacy" className="hover:text-primary underline underline-offset-4">
             Privacy Policy
           </Link>
           .

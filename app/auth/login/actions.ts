@@ -1,9 +1,9 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
+import { createAbsoluteUrl } from '@/lib/utils'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { createAbsoluteUrl } from '@/lib/utils'
 import { z } from 'zod'
 
 export type State = {
@@ -25,7 +25,10 @@ export const signInWithMobile = async (prevState: State, formData: FormData) => 
   try {
     phoneSchema.parse(phone)
   } catch (error) {
-    return { status: 'error', message: 'Please enter a valid phone number with country code' }
+    return {
+      status: 'error',
+      message: 'Please enter a valid phone number with country code',
+    }
   }
 
   const { data, error } = await supabase.auth.signInWithOtp({
@@ -49,7 +52,6 @@ export const signInWithEmail = async (state: State, formData: FormData) => {
   } catch (error) {
     return { status: 'error', message: 'please enter valid email' }
   }
-
 
   const { data, error } = await supabase.auth.signInWithOtp({
     email: email,

@@ -1,10 +1,10 @@
-"use client"
+'use client'
 
-import { Input } from "@/components/tui/input"
-import { Description, Field, FieldGroup, Fieldset, Label, Legend } from '@/components/tui/fieldset'
-import { Button } from "@/components/tui/button"
+import { createEmbed } from '@/app/actions'
+import { Button } from '@/components/tui/button'
+import { Description, Field, Label } from '@/components/tui/fieldset'
+import { Input } from '@/components/tui/input'
 import { useFormState as useActionState, useFormStatus } from 'react-dom'
-import { createEmbed } from "@/app/actions"
 
 export default function Home() {
   const [state, formAction] = useActionState(createEmbed, null)
@@ -30,4 +30,3 @@ export default function Home() {
     </>
   )
 }
-

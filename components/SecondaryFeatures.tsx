@@ -1,10 +1,10 @@
 'use client'
 
-import Image, { type ImageProps } from 'next/image'
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
+import { Tab, TabGroup, TabList } from '@headlessui/react'
 import clsx from 'clsx'
+import { type ImageProps } from 'next/image'
 
-import { Container } from '@/components/tui/Container'
+import { Container } from '@/components/tui/container'
 import screenshotContacts from '@/images/screenshots/focused-reading.png'
 import screenshotInventory from '@/images/screenshots/landing_notes.png'
 import screenshotProfitLoss from '@/images/screenshots/landing_save_anything.png'
@@ -25,7 +25,6 @@ const features: Array<Feature> = [
     description:
       'Keep all your important content in one place, neatly organized and easily searchable. Zetsy ensures that you never lose track of valuable information.',
     image: screenshotProfitLoss,
-
   },
   {
     name: 'Boost Productivity',
@@ -33,7 +32,6 @@ const features: Array<Feature> = [
     description:
       'Spend less time searching and more time doing. With Zetsy’s efficient saving and retrieval system, you can focus on what matters most.',
     image: screenshotInventory,
-
   },
   {
     name: 'Enhanced Privacy',
@@ -41,15 +39,13 @@ const features: Array<Feature> = [
     description:
       'Your data, your rules. Zetsy prioritizes your privacy, ensuring that all your information is stored securely and accessed only by you.',
     image: screenshotContacts,
-
   },
   {
     name: 'Effortless Access',
     summary: 'Access your saved content anytime, anywhere.',
     description:
-      'Access your saved content anytime, anywhere. With Zetsy, your digital memory is always at your fingertips, whether you\'re on your desktop or mobile device.',
+      "Access your saved content anytime, anywhere. With Zetsy, your digital memory is always at your fingertips, whether you're on your desktop or mobile device.",
     image: screenshotContacts,
-
   },
   {
     name: 'Maximize Insights',
@@ -57,7 +53,6 @@ const features: Array<Feature> = [
     description:
       'Turn your saved data into actionable insights. By chatting with your data and using it with various agents, you can extract meaningful information and make informed decisions.',
     image: screenshotContacts,
-
   },
   {
     name: 'Integration with Agents',
@@ -68,10 +63,9 @@ const features: Array<Feature> = [
   },
 ]
 
-
-const title = "Simplify everyday business tasks.";
-const description = "Because you’d probably be a little confused if we suggested you complicate your everyday business tasks instead.";
-
+const title = 'Simplify everyday business tasks.'
+const description =
+  'Because you’d probably be a little confused if we suggested you complicate your everyday business tasks instead.'
 
 function Feature({
   feature,
@@ -83,10 +77,7 @@ function Feature({
   isActive: boolean
 }) {
   return (
-    <div
-      className={clsx(className, !isActive && 'opacity-75 hover:opacity-100')}
-      {...props}
-    >
+    <div className={clsx(className, !isActive && 'opacity-75 hover:opacity-100')} {...props}>
       {/* <div
         className={clsx(
           'w-9 rounded-lg',
@@ -97,17 +88,10 @@ function Feature({
           <feature.icon />
         </svg>
       </div> */}
-      <h3
-        className={clsx(
-          'mt-6 text-sm font-medium',
-          isActive ? 'text-blue-600' : 'text-slate-600',
-        )}
-      >
+      <h3 className={clsx('mt-6 text-sm font-medium', isActive ? 'text-blue-600' : 'text-slate-600')}>
         {feature.name}
       </h3>
-      <p className="mt-2 font-display text-xl text-slate-900">
-        {feature.summary}
-      </p>
+      <p className="mt-2 font-display text-xl text-slate-900">{feature.summary}</p>
       <p className="mt-4 text-sm text-slate-600">{feature.description}</p>
     </div>
   )
@@ -200,14 +184,8 @@ export function SecondaryFeatures() {
     >
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
-
-
-          <h2 className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl">
-            {title}
-          </h2>
-          <p className="mt-4 text-lg tracking-tight text-slate-700">
-            {description}
-          </p>
+          <h2 className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl">{title}</h2>
+          <p className="mt-4 text-lg tracking-tight text-slate-700">{description}</p>
         </div>
         <FeaturesMobile />
         <FeaturesDesktop />

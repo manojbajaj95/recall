@@ -1,10 +1,9 @@
-"use client"
+'use client'
 
-import { SearchBar } from "./SearchDialog"
-import { getRelevantContent } from "@/app/actions"
+import { getRelevantContent } from '@/app/actions'
+import { SearchBar } from './SearchDialog'
 
 export default function Home() {
-
   return (
     <>
       <main className="h-full">

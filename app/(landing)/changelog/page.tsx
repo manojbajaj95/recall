@@ -1,21 +1,19 @@
-import { cn } from '@/lib/utils'
-import { CheckIcon, HandThumbUpIcon, UserIcon } from '@heroicons/react/20/solid'
+import { UserIcon } from '@heroicons/react/20/solid'
 
 const timeline = [
   {
     id: 1,
     icon: UserIcon,
-    content: "Open to waitlist",
+    content: 'Open to waitlist',
     date: 'June 10',
     datetime: '2024-06-10',
     iconBackground: 'bg-gray-400',
-  }
+  },
 ]
-
 
 export default function Example() {
   return (
-    <div className='flex items-center align-center h-full'>
+    <div className="align-center flex h-full items-center">
       <ul role="list" className="-mb-8">
         {timeline.map((event, eventIdx) => (
           <li key={event.id}>
@@ -25,15 +23,13 @@ export default function Example() {
               ) : null}
               <div className="relative flex space-x-3">
                 <div>
-                  <span className='bg-gray-400 flex h-8 w-8 items-center justify-center rounded-full ring-8 ring-white' >
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-400 ring-8 ring-white">
                     <event.icon className="h-5 w-5 text-white" aria-hidden="true" />
                   </span>
                 </div>
                 <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
                   <div>
-                    <p className="text-sm text-gray-500">
-                      {event.content}{' '}
-                    </p>
+                    <p className="text-sm text-gray-500">{event.content} </p>
                   </div>
                   <div className="whitespace-nowrap text-right text-sm text-gray-500">
                     <time dateTime={event.datetime}>{event.date}</time>
