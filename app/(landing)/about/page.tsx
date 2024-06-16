@@ -1,11 +1,10 @@
-"use client"
+'use client'
 
-import { Header } from '@/components/Header'
-import { Footer } from '@/components/Footer'
-import { Logos } from '@/components/Logos'
 import { allBlogs } from '@/.contentlayer/generated'
 import { BlogCard } from '@/components/BlogCard'
-
+import { Footer } from '@/components/Footer'
+import { Header } from '@/components/Header'
+import { LogoCloud } from '@/components/LogoCloud'
 
 const stats = [
   // { label: 'Transactions every 24 hours', value: '44 million' },
@@ -15,40 +14,34 @@ const stats = [
 const values = [
   {
     name: 'Be world-class',
-    description:
-      'Strive for excellence in everything you do. Aim to be the best in your field. Never settle for less.',
+    description: 'Strive for excellence in everything you do. Aim to be the best in your field. Never settle for less.',
   },
   {
     name: 'Share everything you know',
-    description:
-      'Knowledge is meant to be shared. Help others learn and grow by sharing what you know.',
+    description: 'Knowledge is meant to be shared. Help others learn and grow by sharing what you know.',
   },
   {
     name: 'Always learning',
-    description:
-      'Never stop learning. There is always something new to learn and ways to improve.',
+    description: 'Never stop learning. There is always something new to learn and ways to improve.',
   },
   {
     name: 'Be supportive',
-    description:
-      'Support others in their journey. Be there for them in times of need.',
+    description: 'Support others in their journey. Be there for them in times of need.',
   },
   {
     name: 'Take responsibility',
-    description:
-      'Own your actions and decisions. Take responsibility for your mistakes and learn from them.',
+    description: 'Own your actions and decisions. Take responsibility for your mistakes and learn from them.',
   },
   {
     name: 'Enjoy downtime',
-    description:
-      'Take time to relax and recharge. It’s important to balance work and leisure.',
+    description: 'Take time to relax and recharge. It’s important to balance work and leisure.',
   },
 ]
 
-
 export default function Example() {
-  const title = "We’re changing the way people connect.";
-  const subtitle = "We are revolutionizing the way individuals interact and communicate. Our platform fosters a space for meaningful connections and collaborations. We believe in the power of unity and aim to make the world a smaller place through our technology.";
+  const title = 'We’re changing the way people connect.'
+  const subtitle =
+    'We are revolutionizing the way individuals interact and communicate. Our platform fosters a space for meaningful connections and collaborations. We believe in the power of unity and aim to make the world a smaller place through our technology.'
 
   return (
     <div className="bg-white">
@@ -98,14 +91,8 @@ export default function Example() {
             <div className="mx-auto max-w-7xl px-6 pb-32 pt-36 sm:pt-60 lg:px-8 lg:pt-32">
               <div className="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
                 <div className="w-full max-w-xl lg:shrink-0 xl:max-w-2xl">
-
-
-                  <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                    {title}
-                  </h1>
-                  <p className="relative mt-6 text-lg leading-8 text-gray-600 sm:max-w-md lg:max-w-none">
-                    {subtitle}
-                  </p>
+                  <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">{title}</h1>
+                  <p className="relative mt-6 text-lg leading-8 text-gray-600 sm:max-w-md lg:max-w-none">{subtitle}</p>
                 </div>
                 <div className="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
                   <div className="ml-auto w-44 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80">
@@ -167,14 +154,19 @@ export default function Example() {
             <div className="mt-6 flex flex-col gap-x-8 gap-y-20 lg:flex-row">
               <div className="lg:w-full lg:max-w-2xl lg:flex-auto">
                 <p className="text-xl leading-8 text-gray-600">
-                  Our mission is to provide a platform that empowers individuals and businesses alike. We believe in the power of technology to create opportunities and bring people together.
+                  Our mission is to provide a platform that empowers individuals and businesses alike. We believe in the
+                  power of technology to create opportunities and bring people together.
                 </p>
                 <div className="mt-10 max-w-xl text-base leading-7 text-gray-700">
                   <p>
-                    We are committed to creating a user-friendly interface that is accessible to all. Our team is constantly innovating, striving to improve and expand our services to better meet the needs of our users.
+                    We are committed to creating a user-friendly interface that is accessible to all. Our team is
+                    constantly innovating, striving to improve and expand our services to better meet the needs of our
+                    users.
                   </p>
                   <p className="mt-10">
-                    Our values are rooted in respect, integrity, and dedication. We believe in the importance of community and strive to foster a culture of collaboration and inclusivity. We are committed to providing a safe and positive environment for all our users.
+                    Our values are rooted in respect, integrity, and dedication. We believe in the importance of
+                    community and strive to foster a culture of collaboration and inclusivity. We are committed to
+                    providing a safe and positive environment for all our users.
                   </p>
                 </div>
               </div>
@@ -206,7 +198,8 @@ export default function Example() {
           <div className="mx-auto max-w-2xl lg:mx-0">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Our values</h2>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Our values are the foundation of our work. They guide our actions and decisions, shaping the way we operate and interact with our users and each other.
+              Our values are the foundation of our work. They guide our actions and decisions, shaping the way we
+              operate and interact with our users and each other.
             </p>
           </div>
           <dl className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 text-base leading-7 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
@@ -243,7 +236,7 @@ export default function Example() {
             </svg>
           </div>
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <Logos />
+            <LogoCloud />
           </div>
         </div>
 
@@ -281,26 +274,27 @@ function Team() {
     },
     // More people...
   ]
-  return <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-48 lg:px-8">
-    <div className="mx-auto max-w-2xl lg:mx-0">
-      <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Our team</h2>
-      <p className="mt-6 text-lg leading-8 text-gray-600">
-        Sit facilis neque ab nulla vel. Cum eos in laudantium. Temporibus eos totam in dolorum. Nemo vel facere
-        repellendus ut eos dolores similique.
-      </p>
+  return (
+    <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-48 lg:px-8">
+      <div className="mx-auto max-w-2xl lg:mx-0">
+        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Our team</h2>
+        <p className="mt-6 text-lg leading-8 text-gray-600">
+          Sit facilis neque ab nulla vel. Cum eos in laudantium. Temporibus eos totam in dolorum. Nemo vel facere
+          repellendus ut eos dolores similique.
+        </p>
+      </div>
+      <ul
+        role="list"
+        className="mx-auto mt-20 grid max-w-2xl grid-cols-2 gap-x-8 gap-y-16 text-center sm:grid-cols-3 md:grid-cols-4 lg:mx-0 lg:max-w-none lg:grid-cols-5 xl:grid-cols-6"
+      >
+        {team.map((person) => (
+          <li key={person.name}>
+            <img className="mx-auto h-24 w-24 rounded-full" src={person.imageUrl} alt="" />
+            <h3 className="mt-6 text-base font-semibold leading-7 tracking-tight text-gray-900">{person.name}</h3>
+            <p className="text-sm leading-6 text-gray-600">{person.role}</p>
+          </li>
+        ))}
+      </ul>
     </div>
-    <ul
-      role="list"
-      className="mx-auto mt-20 grid max-w-2xl grid-cols-2 gap-x-8 gap-y-16 text-center sm:grid-cols-3 md:grid-cols-4 lg:mx-0 lg:max-w-none lg:grid-cols-5 xl:grid-cols-6"
-    >
-      {team.map((person) => (
-        <li key={person.name}>
-          <img className="mx-auto h-24 w-24 rounded-full" src={person.imageUrl} alt="" />
-          <h3 className="mt-6 text-base font-semibold leading-7 tracking-tight text-gray-900">{person.name}</h3>
-          <p className="text-sm leading-6 text-gray-600">{person.role}</p>
-        </li>
-      ))}
-    </ul>
-  </div>
+  )
 }
-

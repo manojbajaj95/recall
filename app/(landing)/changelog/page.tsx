@@ -3,7 +3,7 @@ import { Container } from '@/components/tui/container'
 import { Heading } from '@/components/tui/heading'
 import { cn } from '@/lib/utils'
 import { allChanges, Change } from 'contentlayer/generated'
-import { format, parseISO, compareDesc } from 'date-fns'
+import { compareDesc, format, parseISO } from 'date-fns'
 
 function ChangeCard(change: Change) {
   return (
@@ -47,8 +47,6 @@ export default function Changelog() {
             </div>
 
             <ChangeCard {...change} />
-
-
           </li>
         ))}
       </ul>

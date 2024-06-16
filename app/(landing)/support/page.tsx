@@ -1,6 +1,10 @@
 'use client'
+import { useFormState as useActionState } from 'react-dom'
+import { addSupportQuery } from './actions'
 
-export default function Example() {
+export default function Support() {
+  const [state, formAction] = useActionState(addSupportQuery, null)
+
   return (
     <div className="relative isolate h-full bg-white">
       <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
@@ -72,18 +76,18 @@ export default function Example() {
             </dl> */}
           </div>
         </div>
-        <form action="#" method="POST" className="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48">
+        <form action={formAction} className="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48">
           <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
             <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
               <div>
-                <label htmlFor="first-name" className="block text-sm font-semibold leading-6 text-gray-900">
+                <label htmlFor="first_name" className="block text-sm font-semibold leading-6 text-gray-900">
                   First name
                 </label>
                 <div className="mt-2.5">
                   <input
                     type="text"
-                    name="first-name"
-                    id="first-name"
+                    name="first_name"
+                    id="first_name"
                     autoComplete="given-name"
                     className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
@@ -96,8 +100,8 @@ export default function Example() {
                 <div className="mt-2.5">
                   <input
                     type="text"
-                    name="last-name"
-                    id="last-name"
+                    name="last_name"
+                    id="last_name"
                     autoComplete="family-name"
                     className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
@@ -118,14 +122,14 @@ export default function Example() {
                 </div>
               </div>
               <div className="sm:col-span-2">
-                <label htmlFor="phone-number" className="block text-sm font-semibold leading-6 text-gray-900">
+                <label htmlFor="phone" className="block text-sm font-semibold leading-6 text-gray-900">
                   Phone number
                 </label>
                 <div className="mt-2.5">
                   <input
                     type="tel"
-                    name="phone-number"
-                    id="phone-number"
+                    name="phone"
+                    id="phone"
                     autoComplete="tel"
                     className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
@@ -146,6 +150,7 @@ export default function Example() {
                 </div>
               </div>
             </div>
+            {state?.message}
             <div className="mt-8 flex justify-end">
               <button
                 type="submit"

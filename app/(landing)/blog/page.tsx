@@ -1,8 +1,5 @@
+import { BlogCard } from '@/components/BlogCard'
 import { Divider } from '@/components/tui/divider'
-import { Blog, allBlogs } from 'contentlayer/generated'
-import { compareDesc, format, parseISO } from 'date-fns'
-import Link from 'next/link'
-import { notFound } from 'next/navigation'
 import {
   Pagination,
   PaginationList,
@@ -10,11 +7,9 @@ import {
   PaginationPage,
   PaginationPrevious,
 } from '@/components/tui/pagination'
-import { BlogCard } from '@/components/BlogCard'
-
-
-
-
+import { allBlogs } from 'contentlayer/generated'
+import { compareDesc } from 'date-fns'
+import { notFound } from 'next/navigation'
 
 export default function Home() {
   const blogs = allBlogs.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))
@@ -25,7 +20,9 @@ export default function Home() {
           <div className="flex items-end justify-between">
             <div className="flex-1 text-center lg:text-left">
               <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">Latest from blog</h2>
-              <p className="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600 lg:mx-0">Learn what we are cooking at Zetsy</p>
+              <p className="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600 lg:mx-0">
+                Learn what we are cooking at Zetsy
+              </p>
             </div>
           </div>
           <Divider />
@@ -35,18 +32,17 @@ export default function Home() {
             ))}
           </div>
           <Divider />
-          <Pagination >
+          <Pagination>
             <PaginationPrevious href="?page=1" />
             <PaginationList>
-              <PaginationPage href="?page=1" current>1</PaginationPage>
+              <PaginationPage href="?page=1" current>
+                1
+              </PaginationPage>
             </PaginationList>
             <PaginationNext href="?page=1" />
           </Pagination>
         </div>
-
       </section>
-
     )
-  }
-  else return notFound()
+  } else return notFound()
 }

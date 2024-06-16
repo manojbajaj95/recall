@@ -8,15 +8,8 @@ import { Logo } from '@/components/Logo'
 import { NavLink } from '@/components/tui/NavLink'
 import { Button } from '@/components/tui/button'
 import { Container } from '@/components/tui/container'
+import { marketingConfig } from '@/config/marketing'
 import { Heading } from './tui/heading'
-
-const links = [
-  { href: '/about', label: 'About' },
-  { href: '/#features', label: 'Features' },
-  { href: "/#testimonials", label: "Testimonials" },
-  { href: '/#pricing', label: 'Pricing' },
-  { href: '/#faq', label: 'FAQ' },
-]
 
 function MobileNavLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
@@ -70,7 +63,7 @@ function MobileNavigation() {
           leaveTo="opacity-0 scale-95"
         >
           <PopoverPanel className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl bg-white p-4 text-lg tracking-tight text-slate-900 shadow-xl ring-1 ring-slate-900/5">
-            {links.map((link) => (
+            {marketingConfig.header.links.map((link) => (
               <MobileNavLink href={link.href} key={link.label}>
                 {link.label}
               </MobileNavLink>
@@ -89,12 +82,12 @@ export function Header() {
       <Container>
         <nav className="relative z-50 flex justify-between">
           <div className="flex items-center md:gap-x-12">
-            <Link href="/#" aria-label="Home" className='flex items-center'>
+            <Link href="/#" aria-label="Home" className="flex items-center">
               <Logo className="h-10 w-auto" />
               <Heading>Zetsy</Heading>
             </Link>
             <div className="hidden md:flex md:gap-x-6">
-              {links.map((link) => (
+              {marketingConfig.header.links.map((link) => (
                 <NavLink href={link.href} key={link.label}>
                   {link.label}
                 </NavLink>

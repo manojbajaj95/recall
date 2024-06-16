@@ -113,7 +113,7 @@ const SidebarComponent = ({ user }: any) => {
           <Link href="#" aria-label="Home">
             <Logo className="h-10 w-auto" />
           </Link>
-          Recall
+          Zetsy
         </SidebarItem>
       </SidebarHeader>
       <SidebarBody>
@@ -156,9 +156,9 @@ const SidebarComponent = ({ user }: any) => {
         <Dropdown>
           <DropdownButton as={SidebarItem}>
             <span className="flex min-w-0 items-center gap-3">
-              <Avatar src="https://api.dicebear.com/8.x/adventurer-neutral/svg" className="size-10" square alt="" />
+              <Avatar src="https://api.dicebear.com/8.x/adventurer/svg" className="size-10" square alt="" />
               <span className="min-w-0">
-                <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">Erica</span>
+                <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">Manoj</span>
                 <span className="block truncate text-xs/5 font-normal text-zinc-500 dark:text-zinc-400">
                   {user.email}
                 </span>

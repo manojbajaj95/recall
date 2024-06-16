@@ -1,39 +1,59 @@
 import { Button } from '@/components/tui/button'
+import { Divider } from '@/components/tui/divider'
 import { Heading } from '@/components/tui/heading'
+import { Database } from '@/lib/database.types'
 import { createClient } from '@/lib/supabase/server'
-import { LinkIcon } from '@heroicons/react/20/solid'
+import { ArrowUpRightIcon, ShareIcon } from '@heroicons/react/20/solid'
 import { cookies } from 'next/headers'
 import { cache } from 'react'
 import { CreateCollection, DeleteSource, MoveCollection } from './collection'
 
-const RenderCollection = ({ collection_name, sources, collections }: any) => {
+type Collection = Database['public']['Tables']['collections']['Row']
+type Source = Database['public']['Tables']['sources']['Row']
+
+const RenderCollection = ({ collection, collections }: { collection: Collection; collections: Collection[] }) => {
+  const collection_name = collection.collection_name.charAt(0).toUpperCase() + collection.collection_name.slice(1)
   return (
-    <>
-      <Heading>{collection_name}</Heading>
-      {sources.map((source, index) => (
-        <div key={index} className="flex justify-between rounded border p-2">
-          <div>
-            <p>Url: {source.source}</p>
-            <p>Type: {source.type}</p>
+    <div>
+      <div className="flex space-x-2">
+        <Heading className="grow">
+          {collection_name}: {collection.collection_details}
+        </Heading>
+        <CreateCollection collection={collection} />
+        <Button>
+          {' '}
+          Share <ShareIcon />
+        </Button>
+      </div>
+      <div className="">
+        {collection?.sources.map((source, index) => (
+          <div key={index} className="flex justify-between rounded border p-2 my-2">
+            <div>
+              <p>Url: {source.source}</p>
+              <p>Type: {source.type}</p>
+            </div>
+            <div className="space-x-2">
+              <Button href={source.source} target="_blank" outline>
+                View
+                <ArrowUpRightIcon />
+              </Button>
+              {/* <Button outline>Edit</Button> */}
+              <MoveCollection source={source.id} collections={collections} />
+              <DeleteSource source={source.id} />
+            </div>
           </div>
-          <div className="space-x-2">
-            <Button href={source.source} target="_blank" outline>
-              View Source
-              <LinkIcon />
-            </Button>
-            <MoveCollection source={source.id} collections={collections} />
-            <DeleteSource source={source.id} />
-          </div>
-        </div>
-      ))}
-    </>
+        ))}
+      </div>
+    </div>
   )
 }
 
 export default async function Library() {
   const getCollections = cache(async () => {
     const client = createClient(cookies())
-    const { data, error } = await client.from('collections').select(`id, collection_name`)
+    const { data, error } = await client
+      .from('collections')
+      .select('id, collection_name, collection_details, sources(id, type, source)')
     if (error) {
       console.error(error)
       return []
@@ -41,40 +61,20 @@ export default async function Library() {
     return data
   })
 
-  const getSources = cache(async () => {
-    let acc: Record<string, []> = {}
-    const client = createClient(cookies())
-    const { data, error } = await client.from('sources').select(`id, type, source , collection(id, collection_name)`)
-    if (error) {
-      console.error(error)
-      return acc
-    }
-    data.forEach((source) => {
-      const collectionName: string = source.collection?.collection_name || 'Uncategorized'
-      if (!acc[collectionName]) {
-        acc[collectionName] = []
-      }
-      acc[collectionName].push(source)
-    })
-    return acc
-  })
-
-  const sources = await getSources()
   const collections = await getCollections()
 
   return (
-    <>
-      <main className="h-full">
-        <div className="flex">
-          <h2 className="grow scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0"> Your Library </h2>
-          <CreateCollection />
-        </div>
-        <div className="space-y-2">
-          {Object.keys(sources).map((key, index) => (
-            <RenderCollection collection_name={key} sources={sources[key]} key={index} collections={collections} />
-          ))}
-        </div>
-      </main>
-    </>
+    <div className="h-full space-y-2">
+      <div className="flex">
+        <Heading className="grow"> Your Library </Heading>
+        <CreateCollection />
+      </div>
+      <Divider />
+      <div className="space-y-2 mt-4">
+        {collections.map((collection, index) => (
+          <RenderCollection collection={collection} key={index} collections={collections} />
+        ))}
+      </div>
+    </div>
   )
 }

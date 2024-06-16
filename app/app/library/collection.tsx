@@ -8,35 +8,43 @@ import { Select } from '@/components/tui/select'
 import { TrashIcon } from '@heroicons/react/20/solid'
 import { useState } from 'react'
 import { useFormState as useActionState } from 'react-dom'
-import { createCollection, deleteSource, moveToCollection } from './actions'
+import { createCollection, deleteSource, editCollection, moveToCollection } from './actions'
 
-export const CreateCollection = () => {
+export const CreateCollection = ({ collection }: { collection?: any }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [state, formAction] = useActionState(createCollection, null)
+  const [state, formAction] = collection
+    ? useActionState(editCollection.bind(null, collection.id), null)
+    : useActionState(createCollection, null)
   return (
     <>
-      <Button onClick={() => setIsOpen(true)}>Create Collection</Button>
+      {collection ? (
+        <Button onClick={() => setIsOpen(true)} outline>
+          Edit
+        </Button>
+      ) : (
+        <Button onClick={() => setIsOpen(true)}>Create Collection</Button>
+      )}
       <Dialog open={isOpen} onClose={setIsOpen}>
-        <DialogTitle>Create Collection</DialogTitle>
+        <DialogTitle>{collection ? 'Edit Collection' : 'Create Collection'}</DialogTitle>
         <DialogDescription>Create a collection to organize your data</DialogDescription>
         <form action={formAction}>
           <DialogBody>
             <Field>
               <Label>Name</Label>
-              <Description>Give a name to your collection</Description>
-              <Input name="name" placeholder="default" />
+              <Description>Give a sutiable name to your collection</Description>
+              <Input name="name" placeholder="default" defaultValue={collection?.collection_name} />
             </Field>
             <Field>
               <Label>Description</Label>
               <Description>Small description about your collection</Description>
-              <Input name="description" placeholder="default" />
+              <Input name="description" placeholder="default" defaultValue={collection?.collection_details} />
             </Field>
           </DialogBody>
           <DialogActions>
             <Button plain onClick={() => setIsOpen(false)}>
               Cancel
             </Button>
-            <Button type="submit">Create</Button>
+            <Button type="submit">{collection ? 'Update' : 'Create'}</Button>
           </DialogActions>
         </form>
       </Dialog>
@@ -55,7 +63,9 @@ export const MoveCollection = ({
   const [state, formAction] = useActionState(moveToCollection.bind(null, source), null)
   return (
     <>
-      <Button onClick={() => setIsOpen(true)}>Move to Collection</Button>
+      <Button outline onClick={() => setIsOpen(true)}>
+        Move
+      </Button>
       <Dialog open={isOpen} onClose={setIsOpen}>
         <DialogTitle>Move to a Collection</DialogTitle>
         <DialogDescription>Organize your sources by moving them to collection</DialogDescription>

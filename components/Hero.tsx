@@ -1,14 +1,7 @@
 import { Container } from '@/components/tui/container'
 import { Waitlist } from '@/components/waitlist'
-
-
-import { Logos } from './Logos'
-
-const heading = {
-  description:
-    'Never lose track of valuable information again. Effortlessly save and retrieve your online discoveries, personal notes, and documents, all in one secure place.',
-}
-
+import { marketingConfig } from '@/config/marketing'
+import { LogoCloud } from './LogoCloud'
 
 export function Hero() {
   return (
@@ -32,15 +25,13 @@ export function Hero() {
       <h2 className="mx-auto max-w-4xl font-display text-3xl font-medium tracking-tight text-slate-900 sm:text-5xl">
         Your Digital Brain
       </h2>
-      <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-700">{heading.description}</p>
+      <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-700">{marketingConfig.hero.subtitle}</p>
       <div className="mt-10 flex justify-center gap-x-6">
         <Waitlist />
         {/* <Button href="/auth/login">Get started</Button> */}
       </div>
       {/* <p className='text-sm text-muted-foreground'>No credit Card required</p> */}
-      <Logos />
+      <LogoCloud />
     </Container>
   )
-
-
 }

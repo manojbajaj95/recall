@@ -2,7 +2,9 @@
 
 import { createEmbed } from '@/app/actions'
 import { Button } from '@/components/tui/button'
+import { Divider } from '@/components/tui/divider'
 import { Description, Field, Label } from '@/components/tui/fieldset'
+import { Heading } from '@/components/tui/heading'
 import { Input } from '@/components/tui/input'
 import { useFormState as useActionState, useFormStatus } from 'react-dom'
 
@@ -12,7 +14,9 @@ export default function Home() {
 
   return (
     <>
-      <main className="h-full">
+      <div className="h-full space-y-2">
+        <Heading>Upload Sources</Heading>
+        <Divider />
         <form action={formAction}>
           <div className="flex flex-col space-y-2">
             <Field>
@@ -26,7 +30,7 @@ export default function Home() {
             </Button>
           </div>
         </form>
-      </main>
+      </div>
     </>
   )
 }

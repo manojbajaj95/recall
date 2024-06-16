@@ -97,6 +97,36 @@ export type Database = {
           },
         ]
       }
+      support: {
+        Row: {
+          created_at: string
+          email: string | null
+          first_name: string | null
+          id: number
+          last_name: string | null
+          message: string | null
+          phone: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          first_name?: string | null
+          id?: number
+          last_name?: string | null
+          message?: string | null
+          phone?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          first_name?: string | null
+          id?: number
+          last_name?: string | null
+          message?: string | null
+          phone?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

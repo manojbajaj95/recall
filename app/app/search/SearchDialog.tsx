@@ -5,7 +5,6 @@ import { Button } from '@/components/tui/button'
 import { Field } from '@/components/tui/fieldset'
 import { Input } from '@/components/tui/input'
 import { Frown, Loader, Search } from 'lucide-react'
-import * as React from 'react'
 import { useFormState as useActionState, useFormStatus } from 'react-dom'
 
 const SubmitButton = () => {
@@ -28,7 +27,7 @@ const Results = ({ results }: { results: [] }) => {
   return (
     <div className="items-center gap-4 overflow-auto dark:text-white">
       {results.map((item, index) => (
-        <div key={index} className="space-y-2 border p-4">
+        <div key={index} className="my-2 border p-4 rounded">
           <MarkdownRenderer markdown={item} />
         </div>
       ))}
@@ -49,12 +48,10 @@ const NoResultsFound = () => {
 
 export function SearchBar({ getRelevantContent }: any) {
   const [state, formAction] = useActionState(getRelevantContent, null)
-  const [isAtTop, setIsAtTop] = React.useState(true)
 
   return (
     <>
-      <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">Search your content</h2>
-      <form action={formAction} className="mx-auto flex flex-col justify-center space-y-2">
+      <form action={formAction} className="mx-auto flex flex-col justify-center space-y-2 w-full">
         <div className="flex items-center justify-center">
           <Search />
           <Field className="mx-4 grow">
