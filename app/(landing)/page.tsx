@@ -1,5 +1,6 @@
 import { Benefits } from '@/components/Benefits'
 import { CallToAction } from '@/components/CallToAction'
+import CheckoutButton from '@/components/CheckoutButton'
 import { Faqs } from '@/components/Faqs'
 import { Features } from '@/components/Features'
 import { Footer } from '@/components/Footer'
@@ -15,7 +16,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <Problem />
+        {/* <Problem /> */}
         <Benefits />
         <Testimonials />
         <Features />

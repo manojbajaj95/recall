@@ -11,7 +11,7 @@ function SubmitEmail() {
   const { pending } = useFormStatus()
   return (
     <Button type="submit" disabled={pending}>
-      {pending ? 'Logging In...' : 'Enter your Email'}
+      {pending ? 'Logging In...' : 'Log In'}
     </Button>
   )
 }
@@ -40,8 +40,7 @@ export default function AuthenticationPage() {
     <div className="lg:p-8">
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col space-y-2 text-center">
-          <h1 className="text-2xl font-semibold tracking-tight">Sign Up</h1>
-          <p className="text-muted-foreground text-sm">Recall is currently invite only. Please use the same email</p>
+          <h1 className="text-2xl font-semibold tracking-tight">Welcome to Zetsy</h1>
         </div>
         <div>
           <SignUpEmail />

@@ -40,7 +40,7 @@ export const signInWithMobile = async (prevState: State, formData: FormData) => 
   redirect(`/auth/verify?phone=${phone}`)
 }
 
-export const signInWithEmail = async (state: State, formData: FormData) => {
+export const signInWithEmail = async (state: State, formData: FormData): Promise<State> => {
   'use server'
   const supabase = createClient(cookies())
   let email = formData.get('email') as string

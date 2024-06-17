@@ -1,8 +1,7 @@
 // Benefits sections
-import chat from '@/images/screenshots/landing_notes.png'
-import reading from '@/images/screenshots/reading-nook.png'
-import remember from '@/images/screenshots/remember.png'
-import save from '@/images/screenshots/save_anything.png'
+import chat from '@/images/screenshots/chat_with_library.png'
+import search from '@/images/screenshots/search.png'
+import save from '@/images/screenshots/save.png'
 
 // Testimonial Section
 import avatarImage1 from '@/images/avatars/avatar-1.png'
@@ -14,11 +13,11 @@ import avatarImage5 from '@/images/avatars/avatar-5.png'
 export const marketingConfig = {
   header: {
     links: [
-      { href: '/about', label: 'About' },
+      // { href: '/about', label: 'About' },
       { href: '/#features', label: 'Features' },
-      { href: '/#testimonials', label: 'Testimonials' },
+      // { href: '/#testimonials', label: 'Testimonials' },
       { href: '/#pricing', label: 'Pricing' },
-      { href: '/#faq', label: 'FAQ' },
+      // { href: '/#faq', label: 'FAQ' },
     ],
   },
   hero: {
@@ -40,16 +39,10 @@ export const marketingConfig = {
         image: save,
       },
       {
-        title: 'Personal Notes & Documents',
-        description:
-          'Store your personal notes and private documents securely. Whether it’s a brainstorming session or important paperwork, Zetsy keeps everything safe and accessible.',
-        image: reading,
-      },
-      {
         title: 'Intelligent Search',
         description:
           'Find what you need when you need it. Our advanced search functionality allows you to quickly locate any saved content, from the latest articles to your private notes.',
-        image: remember,
+        image: search,
       },
       {
         title: 'Chat with Your Data',
@@ -67,7 +60,7 @@ export const marketingConfig = {
       [
         {
           content:
-            'TaxPal is so easy to use I can’t help but wonder if it’s really doing the things the government expects me to do.',
+            'Zetsy is my private knowledge base with AI capabilities that arranges and organizes everything. It can ingest sources like websites, pdfs, podcasts, videos, and news. It organizes and summarizes everything in my library. Zetsy instantly becomes an expert in the information that matters most to me.',
           author: {
             name: 'Sheryl Berge',
             role: 'CEO at Lynch LLC',
@@ -76,7 +69,7 @@ export const marketingConfig = {
         },
         {
           content:
-            'I’m trying to get a hold of someone in support, I’m in a lot of trouble right now and they are saying it has something to do with my books. Please get back to me right away.',
+            'Zetsy has revolutionized the way I manage my knowledge. Its AI capabilities have made it easier for me to organize and retrieve information from various sources like websites, PDFs, podcasts, and videos. It\'s like having a personal assistant that knows everything about my field.',
           author: {
             name: 'Amy Hahn',
             role: 'Director at Velocity Industries',
@@ -87,7 +80,7 @@ export const marketingConfig = {
       [
         {
           content:
-            'The best part about TaxPal is every time I pay my employees, my bank balance doesn’t go down like it used to. Looking forward to spending this extra cash when I figure out why my card is being declined.',
+            'Zetsy has been a game-changer for my business. It not only helps me save valuable information but also summarizes it for quick understanding. It\'s like having an expert on my team who knows exactly what information matters most to me.',
           author: {
             name: 'Leland Kiehn',
             role: 'Founder of Kiehn and Sons',
@@ -96,7 +89,7 @@ export const marketingConfig = {
         },
         {
           content:
-            'There are so many things I had to do with my old software that I just don’t do at all with TaxPal. Suspicious but I can’t say I don’t love it.',
+            'Switching to Zetsy was one of the best decisions I\'ve made for my company. It has simplified our knowledge management process and made it more efficient. I can\'t imagine going back to our old system.',
           author: {
             name: 'Erin Powlowski',
             role: 'COO at Armstrong Inc',
@@ -107,7 +100,7 @@ export const marketingConfig = {
       [
         {
           content:
-            'I used to have to remit tax to the EU and with TaxPal I somehow don’t have to do that anymore. Nervous to travel there now though.',
+            'Zetsy has made it so easy to manage and access my information. I no longer have to worry about losing important data or spending hours searching for it. Zetsy has truly transformed the way I work.',
           author: {
             name: 'Peter Renolds',
             role: 'Founder of West Inc',
@@ -116,7 +109,7 @@ export const marketingConfig = {
         },
         {
           content:
-            'This is the fourth email I’ve sent to your support team. I am literally being held in jail for tax fraud. Please answer your damn emails, this is important.',
+            'I\'ve been using Zetsy for a while now and it has significantly improved my productivity. The AI capabilities are impressive and the system is very user-friendly. I highly recommend Zetsy to anyone looking to improve their knowledge management.',
           author: {
             name: 'Amy Hahn',
             role: 'Director at Velocity Industries',
@@ -173,48 +166,33 @@ export const marketingConfig = {
     faqs: [
       [
         {
-          question: 'Does TaxPal handle VAT?',
-          answer: 'Well no, but if you move your company offshore you can probably ignore it.',
+          "question": "What types of sources can Zetsy ingest and organize information from?",
+          "answer": "Zesty is designed to be a versatile information hub and can process content from a wide range of sources. This includes websites, PDFs, podcasts, videos, and news articles."
         },
         {
-          question: 'Can I pay for my subscription via purchase order?',
-          answer: 'Absolutely, we are happy to take your money in all forms.',
-        },
-        {
-          question: 'How do I apply for a job at TaxPal?',
-          answer: 'We only hire our customers, so subscribe for a minimum of 6 months and then let’s talk.',
+          "question": "Can Zetsy access information behind a paywall?",
+          "answer": "Zesty cannot directly access paywalled content, but it can help you find alternative sources or summarize publicly available information on the topic."
         },
       ],
       [
         {
-          question: 'What was that testimonial about tax fraud all about?',
-          answer: 'TaxPal is just a software application, ultimately your books are your responsibility.',
+          "question": "Can I collaborate with others on my Zetsy knowledge base?",
+          "answer": "Currently, Zetsy is designed for personal use. Collaboration features may be available in future updates."
         },
         {
-          question: 'TaxPal sounds horrible but why do I still feel compelled to purchase?',
-          answer:
-            'This is the power of excellent visual design. You just can’t resist it, no matter how poorly it actually functions.',
+          "question": "What devices can I access Zetsy on?",
+          "answer": "Zetsy may offer access through web browsers and potentially mobile applications in the future. Specific details will depend on the developer's roadmap."
         },
-        {
-          question: 'I found other companies called TaxPal, are you sure you can use this name?',
-          answer:
-            'Honestly not sure at all. We haven’t actually incorporated or anything, we just thought it sounded cool and made this website.',
-        },
+
       ],
       [
         {
-          question: 'How do you generate reports?',
-          answer:
-            'You just tell us what data you need a report for, and we get our kids to create beautiful charts for you using only the finest crayons.',
+          "question": "Does Zetsy offer a free trial?",
+          "answer": "Yes, you can get started with Zetsy for free. You get all the capabilities of Zetsy including AI summaries and chat."
         },
         {
-          question: 'Can we expect more inventory features?',
-          answer: 'In life it’s really better to never expect anything at all.',
-        },
-        {
-          question: 'I lost my password, how do I get into my account?',
-          answer:
-            'Send us an email and we will send you a copy of our latest password spreadsheet so you can find your information.',
+          "question": "Does Zesty have any limitations on the amount of information I can store?",
+          "answer": "The storage capacity of Zetsy will depend on the specific plan you choose. Free plans have limitations on number of cocuments, while paid plans may offer more storage space."
         },
       ],
     ],

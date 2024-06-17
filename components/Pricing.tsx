@@ -71,6 +71,7 @@ export function Plan({
 }
 
 export function Pricing() {
+
   return (
     <section id="pricing" aria-label="Pricing" className="bg-slate-900 py-20 sm:py-32">
       <Container>
@@ -89,7 +90,7 @@ export function Pricing() {
         <div className="-mx-4 mt-16 grid max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:-mx-8 lg:max-w-none lg:grid-cols-3 xl:mx-0 xl:gap-x-8">
           <Plan
             name="Starter"
-            price="$1.99"
+            price="$3.99"
             description="Good for anyone who wants to try it out"
             href="/auth/login"
             features={[
@@ -103,7 +104,7 @@ export function Pricing() {
           <Plan
             featured
             name="Lite"
-            price="$7.99"
+            price="$5.99"
             description="Perfect for daily use"
             href="/auth/login"
             features={[
@@ -116,7 +117,7 @@ export function Pricing() {
           />
           <Plan
             name="Pro"
-            price="$15"
+            price="$7.99"
             description="For the power users out there"
             href="/auth/login"
             features={[
