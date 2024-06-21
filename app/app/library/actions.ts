@@ -15,7 +15,7 @@ export const createCollection = async (prevState: State, formData: FormData): Pr
   const client = createClient(cookies())
   const { data, error } = await client
     .from('collections')
-    .insert([{ collection_name: name, collection_details: description }])
+    .insert([{ name: name, details: description }])
     .select('id')
   if (error) {
     console.error('Error inserting collection: ', error)
@@ -31,7 +31,7 @@ export const editCollection = async (id: number, prevState: State, formData: For
   const client = createClient(cookies())
   const { data, error } = await client
     .from('collections')
-    .update({ collection_name: name, collection_details: description })
+    .update({ name: name, details: description })
     .eq('id', id)
     .select()
   if (error) {

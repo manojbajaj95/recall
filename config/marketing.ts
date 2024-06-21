@@ -10,6 +10,11 @@ import avatarImage3 from '@/images/avatars/avatar-3.png'
 import avatarImage4 from '@/images/avatars/avatar-4.png'
 import avatarImage5 from '@/images/avatars/avatar-5.png'
 
+//  Users section
+import HappyWriter from "@/images/stock/writerer.jpg"
+import HappyResearcher from "@/images/stock/researcher.jpg"
+import HappyPM from "@/images/stock/pm.jpg"
+
 export const marketingConfig = {
   header: {
     links: [
@@ -17,6 +22,8 @@ export const marketingConfig = {
       { href: '/#features', label: 'Features' },
       // { href: '/#testimonials', label: 'Testimonials' },
       { href: '/#pricing', label: 'Pricing' },
+      { href: '/blog', label: 'Blog' },
+      { href: '/changelog', label: 'Changelog' },
       // { href: '/#faq', label: 'FAQ' },
     ],
   },
@@ -25,8 +32,64 @@ export const marketingConfig = {
       'Never lose track of valuable information again. Effortlessly save and retrieve your online discoveries, personal notes, and documents, all in one secure place.',
   },
   problem: {
-    title: 'Today Everyone is a knowledge worker',
+    title: 'Today Everyone is a Knowledge Worker',
     subtitle: 'Zetsy allows you to organize your knowledge sources in one central place.',
+    uses: [
+      {
+        user: "Writers",
+        benefits: [
+          {
+            title: "Get Inspired",
+            description: "Save posts that inspire you in your centralized database"
+          },
+          {
+            title: "Combine Ideas",
+            description: "Effortlessly synthesize ideas from across your collection of notes"
+          },
+          {
+            title: "Organize Writing",
+            description: "Organize your thoughts and reuse ideas in easy-to-manage outlines."
+          }
+        ],
+        image: HappyWriter
+      },
+      {
+        user: "Researchers",
+        benefits: [
+          {
+            title: "Review notes",
+            description: "Capture, structure, and review all of your class notes with ease"
+          },
+          {
+            title: "Manage Sources",
+            description: "Keep track of your research and easily manage your sources"
+          },
+          {
+            title: "Outline papers",
+            description: "Manage your writing process and ensure that your papers are well-organized and flow smoothly."
+          }
+        ],
+        image: HappyResearcher
+      },
+      {
+        user: "Project Managers",
+        benefits: [
+          {
+            title: "Retrieve notes",
+            description: "Always find the information where and when you need it "
+          },
+          {
+            title: "Gather data",
+            description: "Gather user research, surveys in one central place"
+          },
+          {
+            title: "Outline documents",
+            description: "Quickly pull together information and share it in different formats with stakeholders."
+          }
+        ],
+        image: HappyPM
+      }
+    ]
   },
   benefits: {
     title: 'Powerful and Private Memory',

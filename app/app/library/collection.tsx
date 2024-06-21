@@ -32,12 +32,12 @@ export const CreateCollection = ({ collection }: { collection?: any }) => {
             <Field>
               <Label>Name</Label>
               <Description>Give a sutiable name to your collection</Description>
-              <Input name="name" placeholder="default" defaultValue={collection?.collection_name} />
+              <Input name="name" placeholder="default" defaultValue={collection?.name} />
             </Field>
             <Field>
               <Label>Description</Label>
               <Description>Small description about your collection</Description>
-              <Input name="description" placeholder="default" defaultValue={collection?.collection_details} />
+              <Input name="description" placeholder="default" defaultValue={collection?.details} />
             </Field>
           </DialogBody>
           <DialogActions>
@@ -57,7 +57,7 @@ export const MoveCollection = ({
   collections,
 }: {
   source: number
-  collections: { id: number; collection_name: string }[]
+  collections: { id: number; name: string }[]
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [state, formAction] = useActionState(moveToCollection.bind(null, source), null)
@@ -77,7 +77,7 @@ export const MoveCollection = ({
               <Select name="collection">
                 {collections.map((collection) => (
                   <option value={collection.id} key={collection.id}>
-                    {collection.collection_name}
+                    {collection.name}
                   </option>
                 ))}
               </Select>

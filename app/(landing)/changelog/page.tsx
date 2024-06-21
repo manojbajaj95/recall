@@ -1,19 +1,28 @@
+import { FormattedDate } from '@/components/FormattedDate'
 import { Logo } from '@/components/Logo'
 import { Container } from '@/components/tui/container'
 import { Heading } from '@/components/tui/heading'
 import { cn } from '@/lib/utils'
 import { allChanges, Change } from 'contentlayer/generated'
-import { compareDesc, format, parseISO } from 'date-fns'
+import { compareDesc } from 'date-fns'
+import { useMDXComponent } from 'next-contentlayer/hooks'
+
+
 
 function ChangeCard(change: Change) {
+  const MDXContent = useMDXComponent(change.body.code)
   return (
-    <div className="mb-8">
-      {change.version}
+    <div className="mb-8 w-full">
+      <div className='flex'>
+        <p className='grow'>{change.version}</p>
+        <FormattedDate date={change.date} />
+      </div>
       <Heading>{change.title}</Heading>
       <div
         className="text-sm [&>*]:mb-3 [&>*:last-child]:mb-0 prose"
-        dangerouslySetInnerHTML={{ __html: change.body.html }}
-      />
+      >
+        <MDXContent />
+      </div>
     </div>
   )
 }
@@ -30,13 +39,11 @@ export default function Changelog() {
       <ul role="list" className="space-y-6">
         {changes.map((change, index) => (
           <li key={change.slug} className="relative flex gap-x-4">
-            <time dateTime={change.date} className="flex-none py-0.5 text-xs leading-5 text-gray-500">
-              {format(parseISO(change.date), 'LLLL d, yyyy')}
-            </time>
+
             <div
               className={cn(
                 index === allChanges.length - 1 ? 'h-6' : '-bottom-6',
-                'absolute left-[90px] top-0 flex w-6 justify-center'
+                'absolute left-0 top-0 flex w-6 justify-center'
               )}
             >
               <div className="w-px bg-gray-200" />
@@ -47,6 +54,7 @@ export default function Changelog() {
             </div>
 
             <ChangeCard {...change} />
+
           </li>
         ))}
       </ul>

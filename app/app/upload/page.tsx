@@ -6,11 +6,14 @@ import { Divider } from '@/components/tui/divider'
 import { Description, Field, Label } from '@/components/tui/fieldset'
 import { Heading } from '@/components/tui/heading'
 import { Input } from '@/components/tui/input'
+import { Select } from '@/components/tui/select'
 import { useFormState as useActionState, useFormStatus } from 'react-dom'
 
 export default function Home() {
   const [state, formAction] = useActionState(createEmbed, null)
   const { pending } = useFormStatus()
+
+  const collections = [{ id: 1, name: "default" }]
 
   return (
     <>

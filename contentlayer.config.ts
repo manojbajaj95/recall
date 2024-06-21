@@ -1,6 +1,9 @@
 // contentlayer.config.ts
 import { defineDocumentType, makeSource } from 'contentlayer/source-files'
 
+import { rehypePlugins } from "./components/mdx/rehype.mjs"
+import { remarkPlugins } from "./components/mdx/remark.mjs"
+
 export const Blog = defineDocumentType(() => ({
   name: 'Blog',
   filePathPattern: `blog/**/*.md`,
@@ -13,6 +16,11 @@ export const Blog = defineDocumentType(() => ({
   computedFields: {
     url: { type: 'string', resolve: (post) => `/blog/${post._raw.sourceFileName}` },
     slug: { type: 'string', resolve: (post) => post._raw.sourceFileName },
+  },
+  contentType: 'mdx',
+  mdx: {
+    remarkPlugins: remarkPlugins,
+    rehypePlugins: rehypePlugins,
   },
 }))
 
@@ -27,6 +35,11 @@ export const Change = defineDocumentType(() => ({
   computedFields: {
     url: { type: 'string', resolve: (post) => `/changelog/${post._raw.sourceFileName}` },
     slug: { type: 'string', resolve: (post) => post._raw.sourceFileName },
+  },
+  contentType: 'mdx',
+  mdx: {
+    remarkPlugins: remarkPlugins,
+    rehypePlugins: rehypePlugins,
   },
 }))
 

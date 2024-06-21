@@ -1,11 +1,15 @@
 import { allBlogs } from 'contentlayer/generated'
 import { format, parseISO } from 'date-fns'
 import { notFound } from 'next/navigation'
+import { useMDXComponent } from 'next-contentlayer/hooks'
+
 
 const PostLayout = ({ params }: { params: { slug: string } }) => {
-  console.log(allBlogs)
   const post = allBlogs.find((post) => post.slug === params.slug)
   if (!post) return notFound()
+
+  // Parse the MDX file via the useMDXComponent hook.
+  const MDXContent = useMDXComponent(post.body.code)
 
   return (
     <article className="mx-auto max-w-xl py-8">
@@ -15,7 +19,7 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
         </time>
         <h1 className="text-3xl font-bold">{post.title}</h1>
       </div>
-      <div className="[&>*]:mb-3 [&>*:last-child]:mb-0" dangerouslySetInnerHTML={{ __html: post.body.html }} />
+      <MDXContent />
     </article>
   )
 }

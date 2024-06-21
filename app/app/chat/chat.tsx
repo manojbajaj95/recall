@@ -5,7 +5,7 @@ import { Button } from '@/components/tui/button'
 
 import { Input } from '@/components/tui/input'
 import { UserIcon } from '@heroicons/react/20/solid'
-import { useChat } from 'ai/react'
+import { useChat } from '@ai-sdk/react'
 
 const UserMessage = ({ message }: { message: any }) => {
   return (

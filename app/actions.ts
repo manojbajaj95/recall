@@ -10,6 +10,59 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { Resend } from 'resend'
 import { z } from 'zod'
+// import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
+// import { TextLoader } from "langchain/document_loaders/fs/text";
+// import { YoutubeLoader } from "langchain/document_loaders/web/youtube";
+// import { NotionAPILoader } from "langchain/document_loaders/web/notionapi";
+// import { DocxLoader } from "langchain/document_loaders/fs/docx";
+
+
+
+// const loadDocx = async () => {
+//   const loader = new DocxLoader(
+//     "src/document_loaders/tests/example_data/attention.docx"
+//   );
+
+//   const docs = await loader.load();
+// }
+
+
+
+
+// const loadYt = async () => {
+//   const loader = YoutubeLoader.createFromUrl("https://youtu.be/bZQun8Y4L2A", {
+//     language: "en",
+//     addVideoInfo: true,
+//   });
+
+//   const docs = await loader.load();
+
+//   console.log(docs);
+// }
+
+// const loadNotion = async () => {
+//   const pageLoader = new NotionAPILoader({
+//     clientOptions: {
+//       auth: "<NOTION_INTEGRATION_TOKEN>",
+//     },
+//     id: "<PAGE_ID>",
+//     type: "page",
+//   });
+//   const splitter = new RecursiveCharacterTextSplitter();
+
+//   // A page contents is likely to be more than 1000 characters so it's split into multiple documents (important for vectorization)
+//   const pageDocs = await pageLoader.loadAndSplit(splitter);
+// }
+
+// const loadPdf = async () => {
+//   const loader = new PDFLoader("src/document_loaders/example_data/example.pdf");
+//   const docs = await loader.load();
+// }
+
+// const loadText = async () => {
+//   const loader = new TextLoader("src/document_loaders/example_data/example.txt");
+//   const docs = await loader.load();
+// }
 
 export type State = {
   status: 'success' | 'error'
@@ -39,7 +92,7 @@ export const createEmbed = async (prevState: State, formData: FormData): Promise
   }
 
   // read url
-  const text = await extractMd(url)
+  const text = await extractMdFromUrl(url)
   // console.log(text)
 
   const bucketName = `${user.id}`
@@ -152,7 +205,9 @@ export const createEmbed = async (prevState: State, formData: FormData): Promise
  * @param {string} url - The URL of the website to convert to text.
  * @returns {Promise<string>} The text content of the website.
  */
-async function extractMd(url: string) {
+async function extractMdFromUrl(url: string) {
+  // Build a better version using
+  // https://www.npmjs.com/package/@mozilla/readability
   const response = await fetch(`https://md.dhr.wtf/?url=${url}&detailedResponse=true`, {
     headers: {
       'Content-Type': 'text/plain',

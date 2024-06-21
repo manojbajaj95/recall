@@ -16,7 +16,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        {/* <Problem /> */}
+        <Problem />
         <Benefits />
         <Testimonials />
         <Features />

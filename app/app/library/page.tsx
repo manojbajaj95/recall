@@ -11,19 +11,24 @@ import { CreateCollection, DeleteSource, MoveCollection } from './collection'
 type Collection = Database['public']['Tables']['collections']['Row']
 type Source = Database['public']['Tables']['sources']['Row']
 
+
+
 const RenderCollection = ({ collection, collections }: { collection: Collection; collections: Collection[] }) => {
-  const collection_name = collection.collection_name.charAt(0).toUpperCase() + collection.collection_name.slice(1)
+  if (!collection?.sources || collection.sources.length === 0) return <></>
+  const collection_name = collection.name.charAt(0).toUpperCase() + collection.name.slice(1)
   return (
     <div>
       <div className="flex space-x-2">
         <Heading className="grow">
-          {collection_name}: {collection.collection_details}
+          {collection_name}: {collection.details}
         </Heading>
-        <CreateCollection collection={collection} />
-        <Button>
-          {' '}
-          Share <ShareIcon />
-        </Button>
+        {collection.id && <><CreateCollection collection={collection} />
+          {/* <Button>
+            {' '}
+            Share <ShareIcon />
+          </Button> */}
+        </>}
+
       </div>
       <div className="">
         {collection?.sources.map((source, index) => (
@@ -53,7 +58,19 @@ export default async function Library() {
     const client = createClient(cookies())
     const { data, error } = await client
       .from('collections')
-      .select('id, collection_name, collection_details, sources(id, type, source)')
+      .select('id, name, details, sources(id, type, source)')
+    if (error) {
+      console.error(error)
+      return []
+    }
+    return data
+  })
+
+  const getUncategorizedSources = cache(async () => {
+    const client = createClient(cookies())
+    const { data, error } = await client
+      .from('sources')
+      .select('id, type, source').filter('collection', 'is', 'null')
     if (error) {
       console.error(error)
       return []
@@ -62,6 +79,17 @@ export default async function Library() {
   })
 
   const collections = await getCollections()
+  const uncategorizedSources = await getUncategorizedSources()
+
+  const collectionsWithUncategorized = [
+    ...collections,
+    {
+      id: null,
+      name: 'Uncategorized',
+      details: 'Sources without a collection',
+      sources: uncategorizedSources,
+    },
+  ]
 
   return (
     <div className="h-full space-y-2">
@@ -71,7 +99,7 @@ export default async function Library() {
       </div>
       <Divider />
       <div className="space-y-2 mt-4">
-        {collections.map((collection, index) => (
+        {collectionsWithUncategorized.map((collection, index) => (
           <RenderCollection collection={collection} key={index} collections={collections} />
         ))}
       </div>
