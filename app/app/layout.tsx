@@ -210,8 +210,10 @@ export default async function AppLayout({
   }
   const user = session.user
   return (
-    <SidebarLayout navbar={<NavbarComponent />} sidebar={<SidebarComponent user={user} />}>
-      {children}
-    </SidebarLayout>
+    <div className='bg-white lg:bg-zinc-100 dark:bg-zinc-900 dark:lg:bg-zinc-950'>
+      <SidebarLayout navbar={<NavbarComponent />} sidebar={<SidebarComponent user={user} />}>
+        {children}
+      </SidebarLayout>
+    </div>
   )
 }

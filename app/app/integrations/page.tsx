@@ -27,6 +27,13 @@ export default async function Integrations() {
         </Card>
         <Card className='max-w-96'>
           <CardHeader>
+            <CardTitle>Google Drive</CardTitle>
+          </CardHeader>
+          <CardContent>Connect to your Google Drive account to import all your documents in Library. You can sync automatically</CardContent>
+          <CardFooter><Button>Coming Soon</Button></CardFooter>
+        </Card>
+        <Card className='max-w-96'>
+          <CardHeader>
             <CardTitle>Notion</CardTitle>
           </CardHeader>
           <CardContent>Connect to your notion account to import all your personal notes in Library. You can sync automatically</CardContent>

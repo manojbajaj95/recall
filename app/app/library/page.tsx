@@ -12,7 +12,6 @@ type Collection = Database['public']['Tables']['collections']['Row']
 type Source = Database['public']['Tables']['sources']['Row']
 
 
-
 const RenderCollection = ({ collection, collections }: { collection: Collection; collections: Collection[] }) => {
   if (!collection?.sources || collection.sources.length === 0) return <></>
   const collection_name = collection.name.charAt(0).toUpperCase() + collection.name.slice(1)
@@ -34,7 +33,7 @@ const RenderCollection = ({ collection, collections }: { collection: Collection;
         {collection?.sources.map((source, index) => (
           <div key={index} className="flex justify-between rounded border p-2 my-2">
             <div>
-              <p>Url: {source.source}</p>
+              <p>Url: {source.source} </p>
               <p>Type: {source.type}</p>
             </div>
             <div className="space-x-2">
@@ -58,7 +57,7 @@ export default async function Library() {
     const client = createClient(cookies())
     const { data, error } = await client
       .from('collections')
-      .select('id, name, details, sources(id, type, source)')
+      .select('id, name, details, sources(*)')
     if (error) {
       console.error(error)
       return []
@@ -70,7 +69,7 @@ export default async function Library() {
     const client = createClient(cookies())
     const { data, error } = await client
       .from('sources')
-      .select('id, type, source').filter('collection', 'is', 'null')
+      .select('*').filter('collection', 'is', 'null')
     if (error) {
       console.error(error)
       return []

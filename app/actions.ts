@@ -4,41 +4,39 @@
 import { WaitlistTemplate } from '@/components/email/waitlist-template'
 import { createClient } from '@/lib/supabase/server'
 import { openai } from '@ai-sdk/openai'
-import { RecursiveCharacterTextSplitter } from '@langchain/textsplitters'
+import { MarkdownTextSplitter, RecursiveCharacterTextSplitter } from '@langchain/textsplitters'
 import { embed } from 'ai'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { Resend } from 'resend'
 import { z } from 'zod'
-// import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
+import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
+import { nanoid } from 'nanoid'
 // import { TextLoader } from "langchain/document_loaders/fs/text";
-// import { YoutubeLoader } from "langchain/document_loaders/web/youtube";
+import { YoutubeLoader } from "@langchain/community/document_loaders/web/youtube";
 // import { NotionAPILoader } from "langchain/document_loaders/web/notionapi";
-// import { DocxLoader } from "langchain/document_loaders/fs/docx";
+import { DocxLoader } from "langchain/document_loaders/fs/docx";
 
 
 
-// const loadDocx = async () => {
-//   const loader = new DocxLoader(
-//     "src/document_loaders/tests/example_data/attention.docx"
-//   );
-
-//   const docs = await loader.load();
-// }
+const loadDocx = async (blob: Blob) => {
+  const loader = new DocxLoader(blob);
+  const docs = await loader.load();
+  return docs
+}
 
 
 
 
-// const loadYt = async () => {
-//   const loader = YoutubeLoader.createFromUrl("https://youtu.be/bZQun8Y4L2A", {
-//     language: "en",
-//     addVideoInfo: true,
-//   });
+const loadYoutube = async (url: string) => {
+  const loader = YoutubeLoader.createFromUrl(url, {
+    language: "en",
+    addVideoInfo: true,
+  });
 
-//   const docs = await loader.load();
-
-//   console.log(docs);
-// }
+  const docs = await loader.load();
+  return docs
+}
 
 // const loadNotion = async () => {
 //   const pageLoader = new NotionAPILoader({
@@ -54,18 +52,16 @@ import { z } from 'zod'
 //   const pageDocs = await pageLoader.loadAndSplit(splitter);
 // }
 
-// const loadPdf = async () => {
-//   const loader = new PDFLoader("src/document_loaders/example_data/example.pdf");
-//   const docs = await loader.load();
-// }
+const loadPdf = async (blob: Blob) => {
+  const loader = new PDFLoader(blob);
+  const docs = await loader.load();
+  return docs
+}
 
-// const loadText = async () => {
-//   const loader = new TextLoader("src/document_loaders/example_data/example.txt");
-//   const docs = await loader.load();
-// }
+
 
 export type State = {
-  status: 'success' | 'error'
+  status: 'success' | 'error' | 'pending'
   message: string | string[]
 } | null
 
@@ -79,25 +75,19 @@ export const createEmbed = async (prevState: State, formData: FormData): Promise
   }
 
   const url = formData.get('url') as string
+  const file = formData.get('file') as File;
+  const type = formData.get('type') as string
+  console.log(url, "Url")
+  console.log(file, "File")
+  console.log(type, "Type")
 
-  const urlSchema = z.string().url()
-
-  const urlValidation = urlSchema.safeParse(url)
-
-  if (!urlValidation.success || !url) {
-    return {
-      status: 'error',
-      message: 'Please provide a valid URL',
-    }
-  }
-
-  // read url
-  const text = await extractMdFromUrl(url)
-  // console.log(text)
-
+  const id = nanoid(8)
+  let text = ""
+  let path = ""
+  let docs = null
   const bucketName = `${user.id}`
 
-  // Check if bucket exits
+  // Check and create bucket if not exists
   const { data: bucket, error: bucketError } = await supabaseClient.storage.getBucket(bucketName)
 
   if (bucketError && bucketError.message === 'Bucket not found') {
@@ -121,39 +111,96 @@ export const createEmbed = async (prevState: State, formData: FormData): Promise
     }
   }
 
-  const trimmedUrl = url.trim()
-  const urlParts = trimmedUrl.split('/')
-  let lastPart = urlParts.pop()
-  if (!lastPart) {
-    lastPart = urlParts.pop()
+  // If type is website or blog or twitter; get markdown
+  // If type is youtube get transcript
+  // TODO: Handle twitter better 
+  if (type == "blog") {
+    const urlSchema = z.string().url()
+
+    const urlValidation = urlSchema.safeParse(url)
+
+    if (!urlValidation.success || !url) {
+      return {
+        status: 'error',
+        message: 'Please provide a valid URL',
+      }
+    }
+    // read url
+    text = await extractMdFromUrl(url)
+
+    const { error: storageError } = await supabaseClient.storage.from(bucketName).upload(`${id}.md`, text, {
+      contentType: 'text/markdown',
+    })
+    if (storageError) {
+      console.error('Error uploading markdown to Supabase Storage:', storageError)
+      return {
+        status: 'error',
+        message: 'Error uploading markdown',
+      }
+    }
+    path = `/${bucketName}/${id}.md`
+
+    const splitter = new MarkdownTextSplitter({
+      chunkSize: 2048,
+      chunkOverlap: 128,
+    })
+
+    docs = await splitter.createDocuments([text])
+
+  } else if (type == "pdf") {
+    const data = await file.arrayBuffer();
+    const { error: storageError } = await supabaseClient.storage.from(bucketName).upload(`${id}.pdf`, data, {
+      contentType: 'application/pdf',
+    })
+    if (storageError) {
+      console.error('Error uploading PDF to Supabase Storage:', storageError)
+      return {
+        status: 'error',
+        message: 'Error uploading PDF',
+      }
+    }
+    path = `/${bucketName}/${id}.pdf`
+
+    const blob = new Blob([data])
+    docs = await loadPdf(blob)
+  } else if (type == "docx") {
+    const data = await file.arrayBuffer();
+    const { error: storageError } = await supabaseClient.storage.from(bucketName).upload(`${id}.docx`, data, {
+      contentType: 'application/docx',
+    })
+    if (storageError) {
+      console.error('Error uploading PDF to Supabase Storage:', storageError)
+      return {
+        status: 'error',
+        message: 'Error uploading Doc File',
+      }
+    }
+    path = `/${bucketName}/${id}.docx`
+
+    const blob = new Blob([data])
+    docs = await loadDocx(blob)
+  } else if (type == "youtube") {
+    docs = await loadYoutube(url)
+    path = url
   }
-  const slug = lastPart?.split('.').shift()
-  if (!slug) {
-    console.log(url.trim().split('/'))
-    console.log(url.trim().split('/').pop()?.split('.'))
+  else {
     return {
       status: 'error',
-      message: 'Error uploading markdown',
+      message: 'File type not supported',
     }
   }
 
-  const { error: storageError } = await supabaseClient.storage.from(bucketName).upload(`${slug}.md`, text, {
-    contentType: 'text/markdown',
-  })
-  const path = `/${bucketName}/${slug}.md`
-
-  if (storageError) {
-    console.error('Error uploading markdown to Supabase Storage:', storageError)
+  if (!docs) {
     return {
       status: 'error',
-      message: 'Error uploading markdown',
+      message: 'Internal error occurred',
     }
   }
 
   // Save the source to sources table
   const { data: source, error: insertError } = await supabaseClient
     .from('sources')
-    .insert({ path, type: 'website', source: url })
+    .insert({ path, type, source: url || file.name })
     .select('id')
   if (insertError) {
     console.error('Error saving to DB:', insertError)
@@ -163,14 +210,8 @@ export const createEmbed = async (prevState: State, formData: FormData): Promise
     }
   }
 
-  const splitter = new RecursiveCharacterTextSplitter({
-    chunkSize: 2048,
-    chunkOverlap: 128,
-  })
 
-  const output = await splitter.createDocuments([text])
-
-  output.forEach(async (document) => {
+  docs.forEach(async (document) => {
     const { embedding } = await embed({
       model: openai.embedding('text-embedding-3-small'),
       value: document.pageContent,
@@ -209,23 +250,6 @@ async function extractMdFromUrl(url: string) {
   // Build a better version using
   // https://www.npmjs.com/package/@mozilla/readability
   const response = await fetch(`https://md.dhr.wtf/?url=${url}&detailedResponse=true`, {
-    headers: {
-      'Content-Type': 'text/plain',
-    },
-  })
-  const text = await response.text()
-  return text
-}
-
-/**
- * This function converts a PDF to text.
- * It fetches the PDF content using a service and returns the text.
- *
- * @param {string} url - The URL of the PDF to convert to text.
- * @returns {Promise<string>} The text content of the PDF.
- */
-async function extractPdf(url: string) {
-  const response = await fetch(`https://pdf-to-text.dhr.wtf/?url=${url}&detailedResponse=true`, {
     headers: {
       'Content-Type': 'text/plain',
     },

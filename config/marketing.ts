@@ -19,11 +19,12 @@ export const marketingConfig = {
   header: {
     links: [
       // { href: '/about', label: 'About' },
-      { href: '/#features', label: 'Features' },
+      // { href: '/#features', label: 'Features' },
+      // { href: '/#features', label: 'Features' },
       // { href: '/#testimonials', label: 'Testimonials' },
-      { href: '/#pricing', label: 'Pricing' },
-      { href: '/blog', label: 'Blog' },
-      { href: '/changelog', label: 'Changelog' },
+      // { href: '/#pricing', label: 'Pricing' },
+      // { href: '/blog', label: 'Blog' },
+      // { href: '/changelog', label: 'Changelog' },
       // { href: '/#faq', label: 'FAQ' },
     ],
   },
@@ -183,9 +184,8 @@ export const marketingConfig = {
     ],
   },
   features: {
-    title: 'Simplify everyday business tasks.',
-    subtitle:
-      'Because you’d probably be a little confused if we suggested you complicate your everyday business tasks instead.',
+    title: 'Key Features',
+    subtitle: 'Explore the powerful capabilities of Zetsy',
     features: [
       {
         name: 'Stay Organized',

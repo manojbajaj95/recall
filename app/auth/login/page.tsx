@@ -46,8 +46,8 @@ export default function AuthenticationPage() {
           <SignUpEmail />
         </div>
         <p className="text-muted-foreground px-8 text-center text-sm">
-          By clicking continue, you agree to our{' '}
-          <Link href="/terms" className="hover:text-primary underline underline-offset-4">
+          By Logging In, you agree to our{' '}
+          <Link href="/tnc" className="hover:text-primary underline underline-offset-4">
             Terms of Service
           </Link>{' '}
           and{' '}

@@ -7,7 +7,7 @@ import Image from "next/image"
 
 export const Problem = () => {
   return (
-    <section id="about" className="bg-white px-6 py-16 sm:py-32 lg:px-8">
+    <section id="about" className="bg-slate-300 px-6 py-16 sm:py-32 lg:px-8">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">{marketingConfig.problem.title}</h2>
         <p className="mt-6 text-lg leading-8 text-gray-600">{marketingConfig.problem.subtitle}</p>
@@ -17,7 +17,7 @@ export const Problem = () => {
         <TabGroup className="mx-auto p-2">
           <TabList className="p-2 flex justify-center gap-32 my-4">
             {marketingConfig.problem.uses.map((use, index) => (
-              <Tab key={index} className="p-2 rounded-lg data-[selected]:bg-black/10">
+              <Tab key={index} className="p-2 rounded-lg data-[selected]:bg-blue-300/70">
                 <Heading>{use.user}</Heading>
               </Tab>
             ))}
