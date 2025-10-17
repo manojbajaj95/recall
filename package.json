@@ -41,7 +41,7 @@
     "gpt3-tokenizer": "latest",
     "input-otp": "latest",
     "lucide-react": "latest",
-    "mammoth": "^1.8.0",
+    "mammoth": "^1.11.0",
     "mdast-util-to-string": "^4.0.0",
     "mdx-annotations": "^0.1.4",
     "nanoid": "^5.0.7",
